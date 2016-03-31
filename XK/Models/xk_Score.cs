@@ -25,10 +25,10 @@ namespace XK.Models
         /// 学生姓名
         /// </summary>
         public string sco_stu_name { get; set; }
-        /// <summary>
-        /// 课程名称
-        /// </summary>
-        public string sco_cor_name { get; set; }
+        ///// <summary>
+        ///// 课程名称
+        ///// </summary>
+        //public string sco_cor_name { get; set; }
         /// <summary>
         /// 分数
         /// </summary>

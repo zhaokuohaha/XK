@@ -8,7 +8,7 @@ using System.Web;
 namespace XK.Models
 {
     /// <summary>
-    /// 课程表实体
+    /// 开课表
     /// </summary>
     public class xk_Course
     {
@@ -57,10 +57,10 @@ namespace XK.Models
     }
 
     /// <summary>
-    /// 课程表上下文
+    /// 开课表上下文
     /// </summary>
     public class xk_CourseDBContext : DbContext
     {
-        DbSet<Models.xk_Course> xk_Courses { get; set; }
+        public DbSet<Models.xk_Course> xk_Courses { get; set; }
     }
 }

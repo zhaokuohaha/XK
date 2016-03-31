@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户首页</title>
+    <link href="../../css/home.css" rel="stylesheet" />
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="header">
+        <div class="infoheader">版本:1.0</div>
+        <h1>欢迎 @RenderSection("BigTitle", true)</h1>
+        <h4> 请选择你需要的功能</h4>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h1></h1>
+            <div class="col-md-3 col-md-offset-7">
+                <div class="btn-group-vertical btn-group-lg btn-block" role="group">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

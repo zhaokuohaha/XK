@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using XK.Tools;
 using XK.Models;
-using System.Linq;
 
 namespace XK.Controllers
 {
@@ -14,18 +13,23 @@ namespace XK.Controllers
         //
         // GET: /Home/
 
-        UserDBContext udb;
-        public HomeController()
-        {
-            udb = new UserDBContext();
-        }
+        UserDBContext udb= new UserDBContext();
+        static User userEntity = new User();
 
-
+        /// <summary>
+        /// 主页面,处理用户登录和注册
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 处理用户注册
+        /// </summary>
+        /// <param name="f"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Register(FormCollection f)
         {
@@ -33,6 +37,11 @@ namespace XK.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// 处理用户登录, 根据不同的用户类型返回不同的页面视图
+        /// </summary>
+        /// <param name="f"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Login(FormCollection f)
         {
@@ -49,9 +58,22 @@ namespace XK.Controllers
             }
             else
             {
-                ViewData.Model = user;
-                return View(); 
+                userEntity = user.First<User>();
+                TempData["value"] = userEntity.u_name;
+                switch( userEntity.u_level){
+                    case 0:
+                        return View("usrLogin",userEntity);
+                    case 1:
+                        return View("stuLogin",userEntity);
+                    case 2:
+                        return View("tecLogin",userEntity);
+                    case 3:
+                        return View("adminLogin",userEntity);
+                    default:
+                        TempData["info"] = "发生未知错误";
+                        return View("Index");
+                }
             }                
-        }
+        }   
     }
 }

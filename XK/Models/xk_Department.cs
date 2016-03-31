@@ -18,9 +18,11 @@ namespace XK.Models
         [Key]
         [Required]
         string dpt_id { get; set; }
+        /// <summary>
+        /// 系名
+        /// </summary>
         [Required]
         string dpt_name { get; set; }
-        string dpt_header { get; set; }
     }
 
     /// <summary>

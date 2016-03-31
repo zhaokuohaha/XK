@@ -28,7 +28,7 @@ namespace XK.Models
         /// <summary>
         /// 用户级别
         /// </summary>
-        public int level { get; set; }
+        public int u_level { get; set; }
     }
 
     /// <summary>

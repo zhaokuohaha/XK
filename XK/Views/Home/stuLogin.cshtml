@@ -1,0 +1,15 @@
+﻿@model XK.Models.User
+
+@{    
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+ }
+
+@section BigTitle{
+    @Model.u_name hhh
+}
+
+<h1>学生登录页面</h1>
+
+@ViewBag.value
+<hr />
+@TempData["value"]

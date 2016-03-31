@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,7 @@ namespace XK.Models
         /// <summary>
         /// 教师号
         /// </summary>
+        [Key]
         public string tch_id { get; set; }
         /// <summary>
         /// 姓名
@@ -26,6 +28,7 @@ namespace XK.Models
         /// <summary>
         /// 联系电话
         /// </summary>
+        [DataType(DataType.PhoneNumber)]
         public string tch_tel { get; set; }
         /// <summary>
         /// 系编号

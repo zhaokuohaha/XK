@@ -4,16 +4,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="../../css/home.css" rel="stylesheet" />
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="@RenderSection("csslink",false)" rel="stylesheet" />
 </head>
 <body>
-    <body>
-        <div class="header">
-            <div class="infoheader">版本:1.0</div>
-            <h1>@RenderSection("SubTitle",true)</h1>
-        </div>
-        <div class="container">
-            @RenderBody()
-        </div>
-    </body>
+    <div class="header">
+        <div class="infoheader">版本:1.0</div>
+        <h1>@RenderSection("BigTitle",true)</h1>
+        <h4>@RenderSection("SubTitle", false)</h4>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
 </body>
 </html>
