@@ -25,6 +25,10 @@ namespace XK.Models
         /// 用户密码
         /// </summary>
         public string u_password { get; set; }
+        /// <summary>
+        /// 用户级别
+        /// </summary>
+        public int level { get; set; }
     }
 
     /// <summary>

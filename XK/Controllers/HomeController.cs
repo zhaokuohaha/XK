@@ -15,33 +15,43 @@ namespace XK.Controllers
         // GET: /Home/
 
         UserDBContext udb;
-        FormCollection collection;
         public HomeController()
         {
             udb = new UserDBContext();
         }
-        public ActionResult Index(FormCollection collection)
+
+
+        public ActionResult Index()
         {
-            this.collection = collection;
             return View();
         }
 
-        public ActionResult Login()
+        [HttpPost]
+        public ActionResult Register(FormCollection f)
         {
-            ViewData.Model = CheckUser();
-            return View();
+            TempData["info"] = "注册失败,用户已存在";
+            return RedirectToAction("Index");
         }
 
-
-        public object CheckUser()
+        [HttpPost]
+        public ActionResult Login(FormCollection f)
         {
-            string usr="";
-            string psw="";
+            string usr = f["studyid"];
+            string psw = f["password"];
 
             var user = from u in udb.User
-                       where u.u_name == usr || u.u_password == psw
+                       where u.u_name == usr && u.u_password == psw
                        select u;
-            return user;
+            if (user.Count<User>() == 0)
+            {
+                TempData["info"] = "登录失败,用户名或者密码错误";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewData.Model = user;
+                return View(); 
+            }                
         }
     }
 }
