@@ -13,9 +13,13 @@ namespace XK.Models
     public class xk_Score
     {
         /// <summary>
-        /// 学号
+        /// 主键id
         /// </summary>
         [Key]
+        public int sco_id { get; set; }
+        /// <summary>
+        /// 学号
+        /// </summary>
         public string sco_stu_id { get; set; }
         /// <summary>
         /// 课程号
@@ -34,7 +38,7 @@ namespace XK.Models
         /// </summary>
         public double sco_value { get; set; }
     }
-
+        
     /// <summary>
     /// 成绩表上下文
     /// </summary>

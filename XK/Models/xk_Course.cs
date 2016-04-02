@@ -29,10 +29,7 @@ namespace XK.Models
         /// 教师代号
         /// </summary>
         public string cor_tec_id { get; set; }
-        /// <summary>
-        /// 开课系代号
-        /// </summary>
-        public string cor_dpt_id { get; set; }
+        
         /// <summary>
         /// 上课节次
         /// </summary>
@@ -42,13 +39,9 @@ namespace XK.Models
         /// </summary>
         public string cor_iddr { get; set; }
         /// <summary>
-        /// 学期
+        ///  学年 学期
         /// </summary>
         public string cor_trem { get; set; }
-        /// <summary>
-        /// 学年
-        /// </summary>
-        public string cor_year { get; set; }
         /// <summary>
         /// 课程类别
         /// </summary>

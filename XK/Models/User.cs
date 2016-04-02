@@ -39,4 +39,6 @@ namespace XK.Models
         public DbSet<Models.User> User { get; set; }
     }
 
+
+
 }
