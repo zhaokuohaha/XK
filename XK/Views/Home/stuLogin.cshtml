@@ -9,7 +9,9 @@
 }
 
 <h1>学生登录页面</h1>
-
-@ViewBag.value
 <hr />
-@TempData["value"]
+<button type="button"  onclick="location.href = '@Url.Action("SelectCourse", "Student")'">选课</button>
+<button type="button" onclick="location.href = '@Url.Action("DeleteCourse", "Student")'">退课</button>
+<button type="button" onclick="location.href = '@Url.Action("ShowCourse", "Student")'">查看课程</button>
+<button type="button" onclick="location.href = '@Url.Action("ShowTimetable", "Student")'">查看课表</button>
+<button type="button" onclick="location.href = '@Url.Action("ShowScore", "Student")'">查看成绩</button>

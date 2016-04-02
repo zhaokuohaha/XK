@@ -1,0 +1,22 @@
+﻿@model XK.Models.User
+
+@{    
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "用户首页";
+ }
+
+@section BigTitle{
+    @Model.u_name
+}
+
+<h1>学生登录页面</h1>
+<hr />
+<button type="button"  onclick="location.href = '@Url.Action("ShowStuNum", "User")'">查看学生人数</button>
+<button type="button" onclick="location.href = '@Url.Action("ShowTecNum", "User")'">查看教师人数</button>
+<button type="button" onclick="location.href = '@Url.Action("ShowAvgScore", "User")'">查看平均成绩</button>
+<button type="button" onclick="location.href = '@Url.Action("ShowQuote", "User")'">查看留言</button>
+@Html.TextArea("quote");
+<button type="button" onclick="location.href = '@Url.Action("Quote", "User")'">留言</button>
+
+<!--这个页面所有的内容都不用跳转, 可以直接返回结果, 将结果在当前页面显示, 运用阿贾克斯 在页面左边
+    添加一块白板, 专门显示信息-->>

@@ -1,0 +1,15 @@
+﻿@model XK.Models.User
+
+@{    
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title="管理员首页";
+ }
+
+@section BigTitle{
+    @Model.u_name hhh
+}
+
+<h1>学生登录页面</h1>
+<hr />
+<button type="button"  onclick="location.href = '@Url.Action("CourseManage", "Admin")'">课程管理</button>
+<button type="button" onclick="location.href = '@Url.Action("UserManage", "Admin")'">用户管理</button>
