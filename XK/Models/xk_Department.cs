@@ -17,12 +17,12 @@ namespace XK.Models
         /// </summary>
         [Key]
         [Required]
-        string dpt_id { get; set; }
+        public string dpt_id { get; set; }
         /// <summary>
         /// 系名
         /// </summary>
         [Required]
-        string dpt_name { get; set; }
+        public string dpt_name { get; set; }
     }
 
     /// <summary>
