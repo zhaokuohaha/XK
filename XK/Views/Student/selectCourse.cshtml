@@ -1,7 +1,20 @@
-﻿@model XK.Models.xk_Course
-
-@{
-    ViewBag.Title = "selectCourse";
+﻿@{
+    ViewBag.Title = "SelectCourse";
 }
 
-<h2>selectCourse</h2>
+<h2>SelectCourse</h2>
+<hr />
+@ViewBag.term.Count
+
+
+
+<hr />
+@ViewBag.x
+
+<select>
+    text
+        @foreach (string item in ViewBag.term)
+        {
+            <option value="@item">@item</option>
+        }
+</select>

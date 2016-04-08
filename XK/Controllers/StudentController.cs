@@ -28,6 +28,17 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult SelectCourse()
         {
+            var res = from c in course.xk_Courses orderby c.cor_id descending select c.cor_trem;
+            ViewBag.term = res.ToList();
+            
+            ViewBag.term.Sort();
+            
+            ViewBag.x = "testString";
+
+            //UserDBContext cdb = new UserDBContext();
+            //var res = from c in cdb.User select c.u_id;
+            //ViewBag.term = res.ToList<int>();
+
             return View();
         }
 

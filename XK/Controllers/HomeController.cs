@@ -48,7 +48,7 @@ namespace XK.Controllers
             string usr = f["studyid"];
             string psw = f["password"];
 
-            var user = from u in udb.User
+            var user = from u in udb.Users
                        where u.u_name == usr && u.u_password == psw
                        select u;
             if (user.Count<User>() == 0)

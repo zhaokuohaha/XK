@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Web;
 
@@ -17,14 +18,14 @@ namespace XK.Models
         /// </summary>
         [Key]
         public string cor_id { get; set; }
-        /// <summary>
-        /// 课程名
-        /// </summary>
-        public string cor_name { get; set; }
-        /// <summary>
-        /// 学分
-        /// </summary>
-        public string cor_xuefen { get; set; }
+        ///// <summary>
+        ///// 课程名
+        ///// </summary>
+        //public string cor_name { get; set; }
+        ///// <summary>
+        ///// 学分
+        ///// </summary>
+        //public string cor_xuefen { get; set; }
         /// <summary>
         /// 教师代号
         /// </summary>
@@ -54,6 +55,19 @@ namespace XK.Models
     /// </summary>
     public class xk_CourseDBContext : DbContext
     {
+        /// <summary>
+        /// 数据集
+        /// </summary>
         public DbSet<Models.xk_Course> xk_Courses { get; set; }
+
+        /// <summary>
+        /// 绑定数据库表xk_courses
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Course>().ToTable("xk_courses"));
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace XK.Models
         /// </summary>
         public string stu_major { get; set; }
         /// <summary>
-        /// 出生日期
+        /// 出生日期 
         /// </summary>
         [DataType(DataType.Date)]
         public DateTime stu_birth{ get; set; }

@@ -4,6 +4,7 @@ using MySql.Data;
 using MySql.Data.Entity;
 using MySql.Web.Security;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration;
 
 namespace XK.Models
 {
@@ -36,9 +37,15 @@ namespace XK.Models
     /// </summary>
     public class UserDBContext : DbContext
     {
-        public DbSet<Models.User> User { get; set; }
+        public DbSet<Models.User> Users { get; set; }
+        /// <summary>
+        /// 绑定数据库表xk_courses
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new EntityTypeConfiguration<User>().ToTable("users"));
+            base.OnModelCreating(modelBuilder);
+        }
     }
-
-
-
 }

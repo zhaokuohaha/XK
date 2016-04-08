@@ -28,7 +28,7 @@ namespace XK.Models
     /// <summary>
     /// 系 表上下文
     /// </summary>
-    public class DepartmentDBContext : DbContext
+    public class xk_DepartmentDBContext : DbContext
     {
        public DbSet<Models.xk_Department> Department { get; set; }
     }
