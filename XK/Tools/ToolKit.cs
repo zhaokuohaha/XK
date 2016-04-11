@@ -19,5 +19,31 @@ namespace XK.Tools
             a[1] = term.Substring(9, 2);
             return a;
         }
+
+        /// <summary>
+        /// 返回当前学期
+        /// </summary>
+        /// <returns></returns>
+        public static string CurrentTerm()
+        {
+            string ct="";
+            ct += DateTime.Now.Year;
+            switch(DateTime.Now.Month)
+            {
+                case 2:
+                    ct += "春季";break;
+                case 4:
+                    ct += "夏季";break;
+                case 6:
+                    ct += "秋季";break;
+                case 11:
+                    ct += "冬季";break;
+                default:
+                    ct += "";break;
+            }
+            Console.WriteLine(ct);
+            return ct;
+           
+        }
     }
 }

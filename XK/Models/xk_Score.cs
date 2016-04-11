@@ -44,6 +44,15 @@ namespace XK.Models
     /// </summary>
     public class xk_ScoreDBContext : DbContext
     {
-        DbSet<Models.xk_Score> xk_Scores { get; set; }
+        public DbSet<Models.xk_Score> xk_Scores { get; set; }
+        /// <summary>
+        /// 绑定数据库表
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<xk_Score>().ToTable("xk_scores"));
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

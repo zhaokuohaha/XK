@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Web;
 
@@ -34,6 +35,10 @@ namespace XK.Models
         /// 系编号
         /// </summary>
         public string tch_dpt_id { get; set; }
+        /// <summary>
+        /// 教师职位
+        /// </summary>
+        public string tch_pos { get; set; }
     }
 
     /// <summary>
@@ -41,6 +46,15 @@ namespace XK.Models
     /// </summary>
     public class xk_TeacherDBContext : DbContext
     {
-        DbSet<xk_Teacher> xk_Teachers { get; set; }
+        public DbSet<xk_Teacher> xk_Teachers { get; set; }
+        /// <summary>
+        /// 绑定数据库表
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Teacher>().ToTable("xk_teachers"));
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="../../css/home.css" rel="stylesheet" />
-    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/login.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.2.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 </head>
 <body>
     <div class="header">
@@ -15,14 +18,15 @@
         <h4> 请选择你需要的功能</h4>
     </div>
     <div class="container">
-        <div class="row">
+        @RenderBody()
+        @*<div class="row">
             <h1></h1>
             <div class="col-md-3 col-md-offset-7">
                 <div class="btn-group-vertical btn-group-lg btn-block" role="group">
                     @RenderBody()
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 </body>
 </html>

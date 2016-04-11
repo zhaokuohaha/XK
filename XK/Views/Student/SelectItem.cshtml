@@ -1,0 +1,8 @@
+﻿@*@model IEnumerable<XK.Models.SelectCourseItem>*@
+@model IEnumerable<XK.Models.xk_Course>
+<hr />
+<h2>查询结果</h2>
+@foreach(var item in Model)
+{
+    @item.cor_id <br />
+}

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<XK.Models.xk_quote>
+
+hhhhh
+
+@foreach(var item in Model)
+{
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3> @item.q_user </h3>
+        </div>
+        <div class="panel-body">
+            @item.q_content
+        </div>
+    </div>
+}

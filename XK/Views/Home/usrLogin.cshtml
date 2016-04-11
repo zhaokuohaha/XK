@@ -11,12 +11,49 @@
 
 <h1>学生登录页面</h1>
 <hr />
-<button type="button"  onclick="location.href = '@Url.Action("ShowStuNum", "User")'">查看学生人数</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowTecNum", "User")'">查看教师人数</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowAvgScore", "User")'">查看平均成绩</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowQuote", "User")'">查看留言</button>
-@Html.TextArea("quote");
-<button type="button" onclick="location.href = '@Url.Action("Quote", "User")'">留言</button>
 
 <!--这个页面所有的内容都不用跳转, 可以直接返回结果, 将结果在当前页面显示, 运用阿贾克斯 在页面左边
     添加一块白板, 专门显示信息-->>
+
+<div class="row">
+    <div class="col-lg-5">
+        <button class="btn btn-block">
+            @Ajax.ActionLink("查看学生人数", "ShowNum", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })
+        </button>
+        <button class="btn btn-block">
+            @Ajax.ActionLink("查看教师人数", "ShowTecNum", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })
+        </button>
+        <button class="btn  btn-block">
+            @Ajax.ActionLink("查看平均成绩", "ShowAvgScore", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })
+        </button>
+        <button class="btn btn-block">
+            @Ajax.ActionLink("查看留言", "ShowQuote", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })
+        </button>
+        <button type="button" class="btn btn-block" onclick="javascript:showquoteinput()">留言</button>
+        <p></p>
+         <div class="panel panel-primary " id="quotepanel">
+            <div class="panel-heading">
+                <h3>请输入你的留言</h3>
+            </div>
+            <div class="panel-body">
+                <textarea rows="8" name="quotecontent" class="form-control"></textarea>
+            </div>
+            <button class="btn btn-block">
+                @Ajax.ActionLink("<h4>留言</h4>", "Quote", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })
+            </button>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div id="showinfo"></div> 
+    </div>
+</div>
+
+<script>
+    function showquoteinput() {
+        $("#quotepanel").show();
+    }
+    function hidequoteinput() {
+        $("#quotepanel").hide();
+    }
+    window.onload = hidequoteinput();
+</script>

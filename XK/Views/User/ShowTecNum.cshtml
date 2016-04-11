@@ -1,0 +1,13 @@
+﻿@model IEnumerable<XK.Models.xk_Teacher>
+
+<h3>共有 @ViewBag.count 名老师</h3>
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> @item.tch_name</td>
+            <td> @item.tch_pos</td>
+        </tr>
+    }
+</table>
+

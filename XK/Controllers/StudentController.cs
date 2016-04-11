@@ -28,18 +28,40 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult SelectCourse()
         {
-            var res = from c in course.xk_Courses orderby c.cor_id descending select c.cor_trem;
-            ViewBag.term = res.ToList();
-            
-            ViewBag.term.Sort();
-            
-            ViewBag.x = "testString";
-
-            //UserDBContext cdb = new UserDBContext();
-            //var res = from c in cdb.User select c.u_id;
-            //ViewBag.term = res.ToList<int>();
-
+            ViewBag.Term = Tools.ToolKit.CurrentTerm();
             return View();
+        }
+        public ActionResult SelectItem()
+        {
+            
+            ViewBag.name = "1";
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SelectItem(FormCollection fc)
+        {
+            string curname = fc["corname"];
+            xk_CourseItemDBContext cidb = new xk_CourseItemDBContext();
+            xk_CourseDBContext cdb = new xk_CourseDBContext();
+
+           var res = from c in cdb.xk_Courses where c.cor_id.Equals(curname) select c;
+#warning 多表查询bug:The specified LINQ expression contains references to queries that are associated with different contexts
+            #region 多表查询有bug, 未解决
+            //查找用户输入对应的课程
+            //List<SelectCourseItem> res = new List<SelectCourseItem>();
+             //var res = from c in cdb.xk_Courses
+             //      join ci in cidb.xk_CourseItems on c.cor_id equals ci.cori_id
+             //      //where ci.cori_id.Equals(curname) || ci.cori_name.Equals(curname)
+             //      select new SelectCourseItem
+             //      {
+             //          cid = ci.cori_id,
+             //          cname = c.cor_id,
+             //          ctec = c.cor_tec_id,
+             //          ctime = c.cor_time,
+             //          caddr = c.cor_iddr
+             //      };
+            #endregion
+            return PartialView(res);
         }
 
         /// <summary>
@@ -76,6 +98,9 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult ShowScore()
         {
+            var res = from c in course.xk_Courses orderby c.cor_id descending select c.cor_trem;
+            ViewBag.term = res.ToList();
+            ViewBag.term.Sort();
             return View();
         }
     }
