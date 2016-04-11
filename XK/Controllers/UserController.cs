@@ -72,14 +72,7 @@ namespace XK.Controllers
                 q_user = "u12",
                 q_content = "Hello World"
             };
-            
-            using(Models.xk_quoteDBContext qdb = new Models.xk_quoteDBContext())
-            {
-                
-            }
-            
-            
-
+            Models.xk_quoteDBContext qdb = new Models.xk_quoteDBContext();
             if (ModelState.IsValid)
                 return "sueess";
             return "faild";
