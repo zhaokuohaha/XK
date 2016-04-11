@@ -28,18 +28,4 @@ namespace XK.Models
         public string cori_dpt_id { get; set; }
 
     }
-
-    public class xk_CourseItemDBContext : DbContext
-    {
-        public DbSet<xk_CourseItem> xk_CourseItems { get; set; }
-        /// <summary>
-        /// 绑定数据库表
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<xk_CourseItem>().ToTable("xk_courseitems"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

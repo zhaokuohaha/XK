@@ -11,7 +11,7 @@ namespace XK.Controllers
     {
         //
         // GET: /SelectCourse/
-        xk_CourseDBContext course = new xk_CourseDBContext();
+        ModelDbContext course = new ModelDbContext();
 
         /// <summary>
         /// 主页, 这里还没用到, 估计到时候直接返回login, 或者写一个一样的页面
@@ -41,8 +41,8 @@ namespace XK.Controllers
         public ActionResult SelectItem(FormCollection fc)
         {
             string curname = fc["corname"];
-            xk_CourseItemDBContext cidb = new xk_CourseItemDBContext();
-            xk_CourseDBContext cdb = new xk_CourseDBContext();
+            ModelDbContext cidb = new ModelDbContext();
+            ModelDbContext cdb = new ModelDbContext();
 
            var res = from c in cdb.xk_Courses where c.cor_id.Equals(curname) select c;
 #warning 多表查询bug:The specified LINQ expression contains references to queries that are associated with different contexts

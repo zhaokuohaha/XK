@@ -13,7 +13,7 @@
 <hr />
 
 <!--这个页面所有的内容都不用跳转, 可以直接返回结果, 将结果在当前页面显示, 运用阿贾克斯 在页面左边
-    添加一块白板, 专门显示信息-->>
+    添加一块白板, 专门显示信息-->
 
 <div class="row">
     <div class="col-lg-5">
@@ -39,7 +39,7 @@
                 <textarea rows="8" name="quotecontent" class="form-control"></textarea>
             </div>
             <button class="btn btn-block">
-                @Ajax.ActionLink("<h4>留言</h4>", "Quote", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })
+                <h3>@Ajax.ActionLink("留言", "Quote", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })</h3>
             </button>
         </div>
     </div>

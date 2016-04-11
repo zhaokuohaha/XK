@@ -38,21 +38,4 @@ namespace XK.Models
         /// </summary>
         public double sco_value { get; set; }
     }
-        
-    /// <summary>
-    /// 成绩表上下文
-    /// </summary>
-    public class xk_ScoreDBContext : DbContext
-    {
-        public DbSet<Models.xk_Score> xk_Scores { get; set; }
-        /// <summary>
-        /// 绑定数据库表
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<xk_Score>().ToTable("xk_scores"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

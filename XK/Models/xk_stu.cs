@@ -44,21 +44,4 @@ namespace XK.Models
         /// </summary>
         public string stu_tel { get; set; }
     }
-
-    /// <summary>
-    /// 学生表上下文
-    /// </summary>
-    public class xk_StuDBContext : DbContext
-    {
-       public DbSet<xk_Stu> xk_Stus { get; set; }
-        /// <summary>
-        /// 绑定数据库表
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Stu>().ToTable("xk_stus"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

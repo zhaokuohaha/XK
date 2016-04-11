@@ -31,21 +31,4 @@ namespace XK.Models
         /// </summary>
         public int u_level { get; set; }
     }
-
-    /// <summary>
-    /// 普通用户上下文
-    /// </summary>
-    public class UserDBContext : DbContext
-    {
-        public DbSet<Models.User> Users { get; set; }
-        /// <summary>
-        /// 绑定数据库表xk_courses
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new EntityTypeConfiguration<User>().ToTable("users"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

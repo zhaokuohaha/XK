@@ -26,21 +26,4 @@ namespace XK.Models
         /// </summary>
         public string cla_header { get; set; }
     }
-
-    /// <summary>
-    /// 班级上下文
-    /// </summary>
-    public class xk_ClassDBContext : DbContext
-    {
-        DbSet<Models.xk_Class> xk_Classes { get; set; }
-        /// <summary>
-        /// 绑定数据库表
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<xk_Class>().ToTable("xk_classs"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

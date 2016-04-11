@@ -40,21 +40,4 @@ namespace XK.Models
         /// </summary>
         public string tch_pos { get; set; }
     }
-
-    /// <summary>
-    /// 教师表 上下文
-    /// </summary>
-    public class xk_TeacherDBContext : DbContext
-    {
-        public DbSet<xk_Teacher> xk_Teachers { get; set; }
-        /// <summary>
-        /// 绑定数据库表
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Teacher>().ToTable("xk_teachers"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

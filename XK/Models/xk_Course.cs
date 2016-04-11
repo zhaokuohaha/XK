@@ -49,25 +49,4 @@ namespace XK.Models
         public string cor_type { get; set; }
         
     }
-
-    /// <summary>
-    /// 开课表上下文
-    /// </summary>
-    public class xk_CourseDBContext : DbContext
-    {
-        /// <summary>
-        /// 数据集
-        /// </summary>
-        public DbSet<Models.xk_Course> xk_Courses { get; set; }
-
-        /// <summary>
-        /// 绑定数据库表xk_courses
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Course>().ToTable("xk_courses"));
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 }

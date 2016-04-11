@@ -19,7 +19,7 @@ namespace XK.Controllers
         /// <returns></returns>
         public string ShowNum()
         {
-            Models.xk_StuDBContext sdb = new Models.xk_StuDBContext();
+            Models.ModelDbContext sdb = new Models.ModelDbContext();
             var res = from s in sdb.xk_Stus select s.stu_name;
             int count = res.Count();
             return "共有" + count + "名学生";
@@ -31,7 +31,7 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult ShowTecNum()
         {
-            Models.xk_TeacherDBContext tdb = new Models.xk_TeacherDBContext();
+            Models.ModelDbContext tdb = new Models.ModelDbContext();
             var res = from s in tdb.xk_Teachers select s;
             ViewBag.count = res.Count();
             return PartialView(res);
@@ -43,7 +43,7 @@ namespace XK.Controllers
         /// <returns></returns>
         public string ShowAvgScore()
         {
-            Models.xk_ScoreDBContext sdb = new Models.xk_ScoreDBContext();
+            Models.ModelDbContext sdb = new Models.ModelDbContext();
             var res = from s in sdb.xk_Scores select s.sco_value;
             double count = res.Average();
             return "平均成绩: " + count;
@@ -55,7 +55,7 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult ShowQuote()
         {
-            Models.xk_quoteDBContext sdb = new Models.xk_quoteDBContext();
+            Models.ModelDbContext sdb = new Models.ModelDbContext();
             var res = from s in sdb.xk_quotes select s ;
             return View(res);
         }
@@ -64,18 +64,18 @@ namespace XK.Controllers
         /// 留言
         /// </summary>
         /// <returns></returns>
-        public string Quote()
+        public string Quote(FormCollection fcq)
         {
-            
+            string qcontent = fcq["quotecontent"];
             Models.xk_quote q = new Models.xk_quote
             {
                 q_user = "u12",
-                q_content = "Hello World"
+                q_content = qcontent
             };
-            Models.xk_quoteDBContext qdb = new Models.xk_quoteDBContext();
-            if (ModelState.IsValid)
-                return "sueess";
-            return "faild";
+            Models.ModelDbContext qdb = new Models.ModelDbContext();
+            qdb.xk_quotes.Add(q);
+            qdb.SaveChanges();
+            return "success";
         }
 
         //public ActionResult ShowNum()

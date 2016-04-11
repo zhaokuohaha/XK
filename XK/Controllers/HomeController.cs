@@ -13,7 +13,7 @@ namespace XK.Controllers
         //
         // GET: /Home/
 
-        UserDBContext udb= new UserDBContext();
+        ModelDbContext udb = new ModelDbContext();
         static User userEntity = new User();
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace XK.Controllers
             string usr = f["studyid"];
             string psw = f["password"];
 
-            var user = from u in udb.Users
+            var user = from u in udb.xk_Users
                        where u.u_name == usr && u.u_password == psw
                        select u;
             if (user.Count<User>() == 0)
