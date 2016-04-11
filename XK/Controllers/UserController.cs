@@ -22,7 +22,10 @@ namespace XK.Controllers
             Models.ModelDbContext sdb = new Models.ModelDbContext();
             var res = from s in sdb.xk_Stus select s.stu_name;
             int count = res.Count();
-            return "共有" + count + "名学生";
+            string result = "<div class=\"panel panel-info\"><div class=\"panel-heading\">" +
+           "查询结果: </div><div class=\"panel-body\"> 一共有 : " +
+           count + " 名学生 </div></div >";
+            return result;
         }
 
         /// <summary>
@@ -46,7 +49,10 @@ namespace XK.Controllers
             Models.ModelDbContext sdb = new Models.ModelDbContext();
             var res = from s in sdb.xk_Scores select s.sco_value;
             double count = res.Average();
-            return "平均成绩: " + count;
+            string result = "<div class=\"panel panel-info\"><div class=\"panel-heading\">" +
+           "查询结果</div><div class=\"panel-body\"> 平均成绩: " +
+           count + "</div></div >";
+            return result;
         }
 
         /// <summary>
@@ -66,22 +72,21 @@ namespace XK.Controllers
         /// <returns></returns>
         public string Quote(FormCollection fcq)
         {
-            string qcontent = fcq["quotecontent"];
+            string qcontent = Request.Form["quotecontent"];
+            string user = Session["username"] as string;
+            string text = Request.Form["text"];
             Models.xk_quote q = new Models.xk_quote
             {
-                q_user = "u12",
+                q_user = user,
                 q_content = qcontent
             };
             Models.ModelDbContext qdb = new Models.ModelDbContext();
             qdb.xk_quotes.Add(q);
             qdb.SaveChanges();
-            return "success";
+            string result = "<div class=\"panel panel-info\"><div class=\"panel-heading\">" +
+           "您("+ user + ")成功留言</div><div class=\"panel-body\"> " +
+           qcontent + "</div></div >";
+            return result;
         }
-
-        //public ActionResult ShowNum()
-        //{
-        //    return PartialView();
-        //}
-
     }
 }

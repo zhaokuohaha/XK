@@ -4,8 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>选课系统</title>
+    <script src="~/Scripts/jquery-2.2.2.min.js"></script>
     <link href="../../css/home.css" rel="stylesheet" />
     <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -16,13 +18,13 @@
     <div class="container">        
         <div class="content">
             <div class="form-signin">
-                <form action="Home/Login" method="post" class="loginform">
+                <form action="/Home/Login" method="post" class="loginform">
                     <h2 class="form-signin-heading">用户登录</h2>
                     <input value="u" type="text" class="input-block-level" name="studyid" placeholder="学号/用户名"/><p></p>
                     <input value="u" type="password" class="input-block-level" name="password" placeholder="密码"><p></p>
-                    <input type="checkbox" name="rememberme" value="remember-me" />
+                    <input id="rmbme" checked="checked" type="checkbox" name="rememberme" value="remember-me" />
                     记住用户 <p></p>
-                    <input type="submit" class="btn btn-large btn-primary btn-login" name="name" value="登录" />
+                    <input type="submit" onclick="javascript: setCookies();" class="btn btn-large btn-primary btn-login" name="name" value="登录" />
                 </form>
 
                 <form action="Home/Register" method="post">
@@ -35,5 +37,50 @@
 
         </div>
     </div>
+
+
+    <script>
+
+        function setCookies() {
+            if ($("#rmbme").is(":checked")) {
+                setCookie("xk_username", $("input[name=studyid]").val());
+                setCookie("xk_password", $("input[name=password]").val());
+                //document.cookie = "xk_username=" + $("input[name=studyid]").val();
+                //document.cookie = "xk_password=" + $("input[name=password]").val();
+                //$.cookie('xk_username', $("input[name=studyid]").val(), { expires: 7, path: "/" });
+                //$.cookie('xk_password', $("input[name=password]").val(), { expires: 7, path: "/" });
+            }
+            else {
+                setCookie("xk_username", null);
+                setCookie("xk_username", null);
+                //document.cookie = "xk_username=null";
+                //document.cookie = "xk_password=null";
+            }
+        }
+
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+            if (arr = document.cookie.match(reg))
+
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+        function setCookie(name, value) {
+            var Days = 30;
+            var exp = new Date();
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        }
+
+        function getCookies() {
+            $("input[name=studyid]").val(getCookie('xk_username'));
+            $("input[name=password]").val(getCookie('xk_password'));
+        }
+
+        getCookies();
+    </script>
+
 </body>
 </html>

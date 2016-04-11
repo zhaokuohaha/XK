@@ -47,7 +47,7 @@ namespace XK.Controllers
         {
             string usr = f["studyid"];
             string psw = f["password"];
-
+            Session["username"] = usr;
             var user = from u in udb.xk_Users
                        where u.u_name == usr && u.u_password == psw
                        select u;

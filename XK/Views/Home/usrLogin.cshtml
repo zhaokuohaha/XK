@@ -35,12 +35,14 @@
             <div class="panel-heading">
                 <h3>请输入你的留言</h3>
             </div>
-            <div class="panel-body">
-                <textarea rows="8" name="quotecontent" class="form-control"></textarea>
-            </div>
-            <button class="btn btn-block">
-                <h3>@Ajax.ActionLink("留言", "Quote", "User", new AjaxOptions() { UpdateTargetId = "showinfo", HttpMethod = "get" })</h3>
-            </button>
+             
+        @using(Ajax.BeginForm("Quote", "User",
+        new AjaxOptions {HttpMethod="Post", UpdateTargetId = "showinfo", InsertionMode=InsertionMode.InsertAfter})){
+             <div class="panel-body">
+                 <textarea rows="8" name="quotecontent" class="form-control"></textarea>
+             </div>
+             <input type="submit" class="btn btn-block btn-primary" name="submit" value="留言" />
+        }   
         </div>
     </div>
     <div class="col-lg-4">

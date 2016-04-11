@@ -194,6 +194,7 @@
     <Content Include="Views\Student\SelectItem.cshtml" />
     <Content Include="Views\User\ShowTecNum.cshtml" />
     <Content Include="Views\User\ShowQuote.cshtml" />
+    <Content Include="Views\User\infoView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
