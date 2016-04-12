@@ -13,13 +13,13 @@
 <div class="row" style="height:800px">
     <div class="col-lg-3" id="menu">
             <li>@Ajax.ActionLink("查看学生", "ShowStudent", "Admin", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
-            <li>111111111111</li>
-            <li>111111111111</li>
-            <li>111111111111</li>
-            <li>111111111111</li> 
+            <li>@Ajax.ActionLink("添加课程", "AddCourse", "Admin", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+            <li>@Ajax.ActionLink("删除课程", "DeleteCourse", "Admin", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+            <li>@Ajax.ActionLink("修改课程", "UpdateCourse", "Admin", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+            <li>@Ajax.ActionLink("权限设置", "PrivilegeSetting", "Admin", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li> 
     </div>
     <div id="ajaxshow">
-
+        <h1>Ajax返回分部视图在这里显示</h1>
     </div>
 </div>
 

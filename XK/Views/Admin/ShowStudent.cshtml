@@ -1,0 +1,8 @@
+﻿@model IEnumerable<XK.Models.xk_Stu>
+
+<h1>学生查询结果</h1>
+<hr />
+@foreach(var item in Model)
+{
+    @item.stu_name <br />
+}

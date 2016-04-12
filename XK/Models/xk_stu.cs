@@ -33,7 +33,6 @@ namespace XK.Models
         /// <summary>
         /// 出生日期 
         /// </summary>
-        [DataType(DataType.Date)]
         public DateTime stu_birth{ get; set; }
         /// <summary>
         /// 班级
