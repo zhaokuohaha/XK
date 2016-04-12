@@ -35,7 +35,48 @@ namespace XK.Controllers
         #endregion
 
         /// <summary>
-        /// 添加课程
+        /// 返回开通课程视图
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddCourseItem()
+        {
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 处理开通课程请求
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public string DoAddCourseItem(FormCollection fc)
+        {
+            string ciid = fc["ciid"];
+            string ciname = fc["ciname"];
+            string cidp = fc["cidp"];
+            string cixf = fc["cixf"];
+            var resc = from sci in mdb.xk_CourseItems
+                       where sci.cori_id == ciid
+                       select sci.cori_id;
+            if(resc.Count() > 0)
+            {
+                return "课程已存在!";
+            }
+            xk_CourseItem ci = new xk_CourseItem
+            {
+                cori_id = ciid,
+                cori_dpt_id = cidp,
+                cori_name = ciname,
+                cori_xuefen = cixf
+            };
+            mdb.xk_CourseItems.Add(ci);
+            mdb.SaveChanges();
+            return "课程" + ciname + "添加成功";
+        }
+
+
+
+        /// <summary>
+        /// 返回添加课程视图
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -45,13 +86,78 @@ namespace XK.Controllers
         }
 
         /// <summary>
-        /// 删除课程
+        /// 处理添加课程请求
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public string DoAddCourse(FormCollection fc)
+        {
+            string cid = fc["cid"].ToString();
+            string tid = fc["ctch"].ToString();
+            var istea = from t in mdb.xk_Teachers where t.tch_id.Equals(tid) select t.tch_id;
+            if (istea.Count() <= 0)
+            {
+                return "教师号不存在, 请重新输入";
+            }
+            var iscor = from c in mdb.xk_CourseItems where c.cori_id.Equals(cid) select c.cori_id;
+            if (iscor.Count() <= 0)
+            {
+                return "课程不存在, 请开通课程";
+            }
+            xk_Course xc = new xk_Course
+            {
+                cor_id = fc["cid"],
+                cor_iddr = fc["ciddr"],
+                cor_tec_id = fc["ctch"],
+                cor_type = fc["ctype"],
+                cor_time = fc["ctime"],
+                cor_trem = fc["cterm"]
+            };
+            mdb.xk_Courses.Add(xc);
+            mdb.SaveChanges();
+            return "添加成功";
+        }
+
+        /// <summary>
+        /// 返回删除课程视图
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         public ActionResult DeleteCourse()
-        {
+        {          
             return PartialView();
+        }
+
+        /// <summary>
+        /// 选课课程, 返回一张课程列表, 管理员选择课程进行好删除
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public ActionResult SelectDeleteCourse(FormCollection fc)
+        {
+            ViewBag.tname = fc["tname"];
+            IEnumerable<string> tnames = from t in mdb.xk_Teachers
+                           where t.tch_name == fc["tname"]
+                           select t.tch_id;
+            ModelDbContext cs = new ModelDbContext();
+            foreach(string t in tnames)
+            {
+                var resc = from c in mdb.xk_Courses
+                           where c.cor_tec_id == t
+                           select c;
+                cs.xk_Courses.AddRange(resc);
+            }
+            return PartialView(cs.xk_Courses);
+        }
+
+        /// <summary>
+        /// 删除课表, 真正的动作在这里
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public string DoDeleteCourse(FormCollection fc)
+        {
+            return "删除成功";
         }
 
         /// <summary>

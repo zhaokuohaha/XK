@@ -1,0 +1,13 @@
+﻿@using (Ajax.BeginForm("DoAddCourse", "Admin", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+{
+    <div class="form-signin">
+        <input type="text"  name="cid" value="" class="form-control" placeholder="课程号" /><p></p>
+        <input type="text" name="ctch" value="" class="form-control" placeholder="教师代号" /><p></p>
+        <input type="text" name="ctime" value="" class="form-control" placeholder="上课时间" /><p></p>
+        <input type="text" name="caddr" value="" class="form-control" placeholder="上课地址" /><p></p>
+        <input type="text" name="cterm" value="" class="form-control" placeholder="上课学期" /><p></p>
+        <input type="text" name="ctype" value="" class="form-control" placeholder="上课类型" /><p></p>
+        <input type="submit"    name="submit" value="添加" />
+    </div>
+}
+

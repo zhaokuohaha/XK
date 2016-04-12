@@ -14,9 +14,13 @@ namespace XK.Models
     public class xk_Course
     {
         /// <summary>
-        /// 课程号
+        /// 开课表主键id
         /// </summary>
         [Key]
+        public int cor_cid { get; set; }
+        /// <summary>
+        /// 课程号
+        /// </summary>
         public string cor_id { get; set; }
         ///// <summary>
         ///// 课程名

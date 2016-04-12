@@ -72,3 +72,8 @@ button{
     margin-right: 30px;
 }
 
+.fontset{
+    font-family:'YaHei Consolas Hybrid';
+    font-size:18px;
+    line-height:inherit;
+}

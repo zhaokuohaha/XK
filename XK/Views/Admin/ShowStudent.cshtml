@@ -1,8 +1,28 @@
 ﻿@model IEnumerable<XK.Models.xk_Stu>
 
-<h1>学生查询结果</h1>
-<hr />
-@foreach(var item in Model)
-{
-    @item.stu_name <br />
-}
+<div class="panel panel-success">
+    @using (Ajax.BeginForm("SearchStu", "Admin", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+    {
+        <div class="panel-heading">
+            <span class="col-xs-2 fontset">班级号:</span>
+            <input type="text" name="sclass" value="" class="form-control-static col-xs-3" />
+            <span class="col-xs-1"></span>
+            <input type="submit" name="submit" value="提交" class="btn btn-success col-xs-3 fontset" />
+        </div>
+    }
+    <p>&nbsp;</p>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <tr><th>学号</th><th>班级</th><th>姓名</th><th>专业</th></tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="150px;"> @item.stu_id</td>
+                    <td width="150px;"> @item.stu_Cla_id</td>
+                    <td width="150px;"> @item.stu_name</td>
+                    <td width="150px;"> @item.stu_major </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
