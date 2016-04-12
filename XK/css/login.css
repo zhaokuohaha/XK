@@ -7,3 +7,9 @@
     font-family: 'YaHei Consolas Hybrid';
     font-size: larger;
 }
+
+a{
+    display: block;
+    text-decoration: none;
+    text-decoration-line: none;
+}

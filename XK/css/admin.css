@@ -1,0 +1,22 @@
+﻿body {
+    background-color: burlywood;
+}
+
+#menu{
+    padding:0;
+    background-color: darkseagreen;
+}
+
+li{
+    font-size: 26px;
+    font-family: 'YaHei Consolas Hybrid';
+    display: block;
+    line-height:50px;
+    text-align:center;
+    padding:0;
+}
+li:hover{
+    background: #27AE60;
+    cursor:pointer;
+}
+

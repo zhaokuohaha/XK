@@ -1,15 +1,39 @@
-﻿@model XK.Models.User
-
-@{    
+﻿@{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
     ViewBag.Title="管理员首页";
  }
-
-@section BigTitle{
-    @Model.u_name hhh
+@section cssfile{
+    <link href="~/css/admin.css" rel="stylesheet" />
 }
 
-<h1>学生登录页面</h1>
-<hr />
+@section BigTitle{
+    @Session["username"]
+}
+
+<div class="row" style="height:800px">
+    <div class="col-lg-3" id="menu">
+            <li>@Ajax.ActionLink("查看学生", "ShowStudent", "Admin", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li> 
+    </div>
+    <div id="ajaxshow">
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <button type="button"  onclick="location.href = '@Url.Action("CourseManage", "Admin")'">课程管理</button>
 <button type="button" onclick="location.href = '@Url.Action("UserManage", "Admin")'">用户管理</button>

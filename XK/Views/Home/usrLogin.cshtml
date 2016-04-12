@@ -1,15 +1,13 @@
-﻿@model XK.Models.User
-
-@{    
+﻿@{    
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
     ViewBag.Title = "用户首页";
  }
 
 @section BigTitle{
-    @Model.u_name
+    @Session["username"]
 }
 
-<h1>学生登录页面</h1>
+<h1>用户登录页面</h1>
 <hr />
 
 <!--这个页面所有的内容都不用跳转, 可以直接返回结果, 将结果在当前页面显示, 运用阿贾克斯 在页面左边
