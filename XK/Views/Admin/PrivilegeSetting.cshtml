@@ -1,0 +1,24 @@
+﻿@using (Ajax.BeginForm("DoPrivilegeSetting", "Admin", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+{
+    <div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>学生权限: 是否可以选课</h4>
+            </div>
+            <input type="radio" name="CanSelectCourse" value="true" checked="checked"/> 是
+            <input type="radio" name="CanSelectCourse" value="false" /> 否
+        </div>
+        
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>教师权限: 是否可以录入成绩</h4>
+            </div>
+            <input type="radio" name="CanUpdateScore" value="true" checked="checked"/> 是
+            <input type="radio" name="CanUpdateScore" value="false" /> 否
+        </div>
+    </div>
+    <input type="submit" class="btn btn-block btn-success" value="确定更新" />
+}
+
+
+

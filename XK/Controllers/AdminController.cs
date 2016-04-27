@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using XK.Models;
 using XK.Tools;
-
+using Newtonsoft.Json.Linq;
+using System.IO;
 namespace XK.Controllers
 {
     public class AdminController : Controller
@@ -29,7 +30,7 @@ namespace XK.Controllers
         //[HttpPost]
         public ActionResult ShowStudent()
         {
-            var res = from s in mdb.xk_Stus select s;
+            var res = from s in mdb.xk_Stus select s ;
             return PartialView(res);
         }
         #endregion
@@ -175,8 +176,57 @@ namespace XK.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult PrivilegeSetting()
+        public PartialViewResult PrivilegeSetting()
         {
+           
+            //是否可以选课
+            var s = from r in mdb.xk_Settings where r.st_name == "CanSelectCourse" select r.st_value;
+            string isS = s.FirstOrDefault();
+            ViewBag.CanSelectCourse = (isS == null) ? false : true;
+
+            //是否可以录入成绩
+            s = from r in mdb.xk_Settings where r.st_name == "CanUpdateScore" select r.st_value;
+            string isU = s.FirstOrDefault();
+            ViewBag.CanUpdateScore = (isS == null) ? false : true;
+
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 设置权限, 刷新选课/录入成绩权限
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public PartialViewResult DoPrivilegeSetting(FormCollection fc)
+        {
+            //允许选课
+            string CanSelectCourse = fc["CanSelectCourse"];
+            //录入成绩
+            string CanUpdateScore = fc["CanUpdateScore"];
+
+            xk_Setting xs = mdb.xk_Settings.FirstOrDefault(m => m.st_name == CanSelectCourse);
+            //数据库中是否存在记录
+            if (xs==null)
+            {
+                mdb.xk_Settings.Add(new xk_Setting { st_name = "CanSelectCourse", st_value = CanSelectCourse });
+                mdb.SaveChanges();
+            }
+            else
+            {
+                xs.st_value = CanSelectCourse;
+                mdb.SaveChanges();
+            }
+            xs = mdb.xk_Settings.FirstOrDefault(m => m.st_name.Equals(CanUpdateScore));
+            if (xs == null)
+            {
+                mdb.xk_Settings.Add(new xk_Setting { st_name = "CanUpdateScore", st_value = CanUpdateScore });
+                mdb.SaveChanges();
+            }
+            else
+            {
+                xs.st_value = CanUpdateScore;
+                mdb.SaveChanges();
+            }
             return PartialView();
         }
     }

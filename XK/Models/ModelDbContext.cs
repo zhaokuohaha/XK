@@ -50,6 +50,8 @@ namespace XK.Models
         /// </summary>
         public DbSet<xk_Stu> xk_Stus { get; set; }
 
+        public DbSet<xk_Setting> xk_Settings { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Teacher>().ToTable("xk_teachers"));
@@ -61,6 +63,7 @@ namespace XK.Models
             modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Score>().ToTable("xk_scores"));
             modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Stu>().ToTable("xk_stus"));
             modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Department>().ToTable("xk_departments"));
+            modelBuilder.Configurations.Add(new EntityTypeConfiguration<xk_Setting>().ToTable("xk_setting"));
             base.OnModelCreating(modelBuilder);
         }
     }
