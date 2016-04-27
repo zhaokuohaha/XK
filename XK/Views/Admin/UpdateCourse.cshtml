@@ -1,0 +1,9 @@
+﻿@model XK.Models.xk_Course
+
+@using(Ajax.BeginForm("ListUpdateCourse","Admin",new AjaxOptions{HttpMethod="Post", UpdateTargetId ="ajaxshow", InsertionMode =  InsertionMode.InsertAfter }))
+{
+    @Html.Label("请输入课程号:")
+    @Html.EditorFor(m => m.cor_id)
+    <input type="submit" class="btn btn-primary" value="提交" />
+}
+

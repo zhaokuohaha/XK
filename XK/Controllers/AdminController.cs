@@ -136,19 +136,9 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult SelectDeleteCourse(FormCollection fc)
         {
-            ViewBag.tname = fc["tname"];
-            IEnumerable<string> tnames = from t in mdb.xk_Teachers
-                           where t.tch_name == fc["tname"]
-                           select t.tch_id;
-            ModelDbContext cs = new ModelDbContext();
-            foreach(string t in tnames)
-            {
-                var resc = from c in mdb.xk_Courses
-                           where c.cor_tec_id == t
-                           select c;
-                cs.xk_Courses.AddRange(resc);
-            }
-            return PartialView(cs.xk_Courses);
+            IQueryable<xk_Course> teaList = mdb.xk_Courses.Where(m => m.cor_tec_id.Equals(fc["tid"]));
+            ViewBag.tname = mdb.xk_Teachers.FirstOrDefault(m => m.tch_id.Equals(fc["tid"])).tch_name;
+            return PartialView(teaList);
         }
 
         /// <summary>
@@ -167,6 +157,11 @@ namespace XK.Controllers
         /// <returns></returns>
         [HttpPost]
         public ActionResult UpdateCourse()
+        {
+            return PartialView();
+        }
+
+        public ActionResult ListUpdateCourse()
         {
             return PartialView();
         }

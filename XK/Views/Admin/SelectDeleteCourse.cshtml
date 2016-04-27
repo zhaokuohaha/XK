@@ -1,4 +1,4 @@
-﻿@model IEnumerable<XK.Models.xk_Course>
+﻿@model IQueryable<XK.Models.xk_Course>
 
 @using (Ajax.BeginForm("DoDeleteCourse", "Admin", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
 {
