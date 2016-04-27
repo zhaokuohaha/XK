@@ -12,7 +12,7 @@
     }
     <p>&nbsp;</p>
     <div class="panel-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="StudentTable">
             <tr><th>学号</th><th>班级</th><th>姓名</th><th>专业</th></tr>
             @foreach (var item in Model)
             {
@@ -26,3 +26,7 @@
         </table>
     </div>
 </div>
+
+<script>
+    $('#StudentTable').dataTable({});
+</script>
