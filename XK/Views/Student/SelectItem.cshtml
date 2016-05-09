@@ -1,8 +1,31 @@
-﻿@*@model IEnumerable<XK.Models.SelectCourseItem>*@
-@model IEnumerable<XK.Models.xk_Course>
+﻿@model IEnumerable<XK.Models.SelectCourseItem>
+@*@model IEnumerable<XK.Models.xk_Course>*@
 <hr />
 <h2>查询结果</h2>
-@foreach(var item in Model)
-{
-    @item.cor_id <br />
-}
+<div class="jumbotron">
+	<table class="table table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th>课号</th>
+				<th>课名</th>
+				<th>教师号</th>
+				<th>时间</th>
+				<th>地址</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.cid</td>
+					<td>@item.cname</td>
+					<td>@item.ctec</td>
+					<td>@item.ctime</td>
+					<td>@item.caddr</td>
+					<td>@Ajax.ActionLink("选课", "SelectCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

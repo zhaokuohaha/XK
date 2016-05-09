@@ -17,7 +17,7 @@ namespace XK.Models
         /// 开课表主键id
         /// </summary>
         [Key]
-        public int cor_cid { get; set; }
+        public string cor_cid { get; set; }
         /// <summary>
         /// 课程号
         /// </summary>
