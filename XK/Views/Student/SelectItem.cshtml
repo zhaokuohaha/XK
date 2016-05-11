@@ -24,7 +24,7 @@
 					<td>@item.ctime</td>
 					<td>@item.caddr</td>
 					<td>
-						@using (Ajax.BeginForm("SelectCourse", "Student", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+						@using (Ajax.BeginForm("doSelectCourse", "Student", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
 						{
 							@Html.HiddenFor(s => item.cid)
 							<input type="submit" class="btn btn-warning" value="选课" />

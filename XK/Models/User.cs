@@ -18,6 +18,11 @@ namespace XK.Models
         /// </summary>
         [Key]
         public int u_id { get; set; }
+
+		/// <summary>
+		/// 用户的角色id: 即学号,工号等等
+		/// </summary>
+		public string u_rid { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>

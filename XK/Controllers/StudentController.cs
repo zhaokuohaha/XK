@@ -21,12 +21,20 @@ namespace XK.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// 选课
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult SelectCourse(string c_id)
+		/// <summary>
+		/// 选课
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult SelectCourse()
+		{
+			ViewBag.Term = Tools.ToolKit.CurrentTerm();
+			return View();
+		}
+		/// <summary>
+		/// 执行选课动作
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult doSelectCourse(string c_id)
 		{
 			string currentTerm = Tools.ToolKit.CurrentTerm();
 
@@ -46,7 +54,6 @@ namespace XK.Controllers
 				return PartialView();
 			}
 			int uid = int.Parse(System.Web.HttpContext.Current.Session["uid"].ToString());
-#warning 先放一放, 重新去处理登录逻辑
 			return View();
         }
 		public ActionResult SelectItem()

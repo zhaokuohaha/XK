@@ -18,11 +18,7 @@ namespace XK.Models
         /// </summary>
         [Key]
         public string stu_id { get; set; }
-
-		/// <summary>
-		/// 密码
-		/// </summary>
-		public string stu_pswd { get; set; }
+		
 		/// <summary>
 		/// 姓名
 		/// </summary>
