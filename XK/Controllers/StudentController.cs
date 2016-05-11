@@ -53,20 +53,50 @@ namespace XK.Controllers
 			string uid = System.Web.HttpContext.Current.Session["uid"].ToString();
 			//是否已经选过并且没有挂科
 			var validCourse = mdb.xk_Scores.FirstOrDefault(m => m.sco_stu_id == uid && m.sco_cor_id == course.cor_id && m.sco_value >= 60);
-#warning 上课时间冲突怎么办?!!!!
-			//学期, 人数, 开放选课
-			if (!course.cor_trem.Equals(currentTerm)			//不是本学期
-				|| course.cor_currentnum > course.cor_maxnum	//选课人数已满
-				|| canSelect != "true"							//没有开放选课
-				|| validCourse != null)							//已经选过并且没有挂科
+			var courseTimes = from co in mdb.xk_Courses where new {co.cor_id , co.cor_tec_id}.Equals(
+							  (from s in mdb.xk_Scores where s.sco_stu_id == uid select new { s.sco_cor_id,s.sco_tea_id}))
+							  select co.cor_time;
+			//是否是有效的选课时间
+			bool validSelectTime = true;
+			foreach (string time in courseTimes)
 			{
+				if (Tools.ToolKit.timeClash(time, course.cor_time))
+				{
+					validSelectTime = false;
+					break;
+				}
+			}
+			if (!course.cor_trem.Equals(currentTerm)            //不是本学期
+				|| course.cor_currentnum > course.cor_maxnum    //选课人数已满
+				|| canSelect != "true"                          //没有开放选课
+				|| validCourse != null							//已经选过并且没有挂科
+				|| validSelectTime == false)                    //选课时间冲突
+			{
+				if (!course.cor_trem.Equals(currentTerm))
+				{
+					ViewBag.resultInfo = "不是本学期的课程";
+				}
+				if (course.cor_currentnum > course.cor_maxnum)
+				{
+					ViewBag.resultInfo = "选课人数已满";
+				}
+				if (canSelect != "true")
+				{
+					ViewBag.resultInfo = "选课时间未到";
+				}
+				if (validCourse != null)
+				{
+					ViewBag.resultInfo = "已经选过该课程";
+				}
+				if (validSelectTime == false)
+				{
+					ViewBag.resultInfo = "选课时间冲突";
+				}
 				ViewBag.result = "false";
 				return PartialView();
 			}
-			
-			ViewBag.cs = canSelect;
-			ViewBag.uid = uid;
-			return View();
+			//写到数据库
+			return PartialView();
         }
 		public ActionResult SelectItem()
 		{
@@ -79,9 +109,10 @@ namespace XK.Controllers
 		public ActionResult SelectItem(FormCollection fc)
 		{
 			string curname = fc["corname"];
+			string currentTerm = Tools.ToolKit.CurrentTerm();
 			var query = from res in mdb.xk_CourseItems
 						join ress in mdb.xk_Courses on res.cori_id equals ress.cor_id
-						where res.cori_name == curname || res.cori_id == curname
+						where (res.cori_name == curname || res.cori_id == curname) //&& ress.cor_trem == currentTerm
 						select new Models.SelectCourseItem()
 						{
 							cid = ress.cor_id,
