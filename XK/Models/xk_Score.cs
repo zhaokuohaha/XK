@@ -25,6 +25,11 @@ namespace XK.Models
         /// 上课学期
         /// </summary>
         public string sco_cor_term { get; set; }
+
+		/// <summary>
+		/// 课程号
+		/// </summary>
+		public string sco_cor_id { get; set; }
         /// <summary>
         /// 教师id
         /// </summary>

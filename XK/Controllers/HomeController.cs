@@ -58,7 +58,7 @@ namespace XK.Controllers
             else
             {
 				//将用户信息写入session
-				System.Web.HttpContext.Current.Session.Add("uid", uid);
+				System.Web.HttpContext.Current.Session["uid"] = uid;
 				TempData["value"] = user.u_name;
 				switch (user.u_level)
 				{

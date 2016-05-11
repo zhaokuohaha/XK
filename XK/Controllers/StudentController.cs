@@ -45,15 +45,27 @@ namespace XK.Controllers
 			3. 有时间冲突的课不能再选
 			4. 达到人数上限的课不能再选
 			*/
-
+			//课程对象
 			var course = mdb.xk_Courses.FirstOrDefault(m => m.cor_id == c_id);
-			//学期, 人数
-			if (!course.cor_trem.Equals(currentTerm) || course.cor_currentnum>course.cor_maxnum)
+			//开放选课
+			string canSelect = mdb.xk_Settings.First(m => m.st_name == "CanSelectCourse").st_value.ToString();
+			//用户id---存在session中(角色id)
+			string uid = System.Web.HttpContext.Current.Session["uid"].ToString();
+			//是否已经选过并且没有挂科
+			var validCourse = mdb.xk_Scores.FirstOrDefault(m => m.sco_stu_id == uid && m.sco_cor_id == course.cor_id && m.sco_value >= 60);
+#warning 上课时间冲突怎么办?!!!!
+			//学期, 人数, 开放选课
+			if (!course.cor_trem.Equals(currentTerm)			//不是本学期
+				|| course.cor_currentnum > course.cor_maxnum	//选课人数已满
+				|| canSelect != "true"							//没有开放选课
+				|| validCourse != null)							//已经选过并且没有挂科
 			{
 				ViewBag.result = "false";
 				return PartialView();
 			}
-			int uid = int.Parse(System.Web.HttpContext.Current.Session["uid"].ToString());
+			
+			ViewBag.cs = canSelect;
+			ViewBag.uid = uid;
 			return View();
         }
 		public ActionResult SelectItem()
