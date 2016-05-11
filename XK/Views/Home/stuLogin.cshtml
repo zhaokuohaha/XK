@@ -1,17 +1,29 @@
 ﻿@model XK.Models.User
-
 @{    
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
  }
-
 @section BigTitle{
     @Model.u_name hhh
 }
+@section cssfile{
+	<link rel="stylesheet" href="~/css/student.css" />
+}
 
-<h1>学生登录页面</h1>
-<hr />
-<button type="button"  onclick="location.href = '@Url.Action("SelectCourse", "Student")'">选课</button>
-<button type="button" onclick="location.href = '@Url.Action("DeleteCourse", "Student")'">退课</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowCourse", "Student")'">查看课程</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowTimetable", "Student")'">查看课表</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowScore", "Student")'">查看成绩</button>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			<div class="menu">
+				<li>@Ajax.ActionLink("选课", "SelectCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+				<li>@Ajax.ActionLink("退课", "DeleteCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+				<li>@Ajax.ActionLink("查看课程", "ShowCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+				<li>@Ajax.ActionLink("查看课程", "ShowTimetable", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+				<li>@Ajax.ActionLink("查看成绩", "ShowScore", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div id="ajaxshow">
+				
+			</div>
+		</div>
+	</div>
+</div>

@@ -271,6 +271,7 @@
     <Content Include="css\admin.css" />
     <Content Include="css\home.css" />
     <Content Include="css\login.css" />
+    <Content Include="css\student.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\contentbg.jpg" />
@@ -379,6 +380,8 @@
     <Content Include="Views\Admin\PrivilegeSetting.cshtml" />
     <Content Include="Views\Admin\DoPrivilegeSetting.cshtml" />
     <Content Include="Views\Admin\UpdateCourse.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Views\Shared\_CurseSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
