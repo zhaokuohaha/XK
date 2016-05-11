@@ -34,11 +34,21 @@ namespace XK.Models
         /// 教师代号
         /// </summary>
         public string cor_tec_id { get; set; }
-        
-        /// <summary>
-        /// 上课节次
-        /// </summary>
-        public string cor_time { get; set; }
+
+		/// <summary>
+		/// 人数上限
+		/// </summary>
+		public int cor_maxnum { get; set; }
+
+		/// <summary>
+		/// 已选人数
+		/// </summary>
+		public int cor_currentnum { get; set; }
+
+		/// <summary>
+		/// 上课节次
+		/// </summary>
+		public string cor_time { get; set; }
         /// <summary>
         /// 上课地点
         /// </summary>

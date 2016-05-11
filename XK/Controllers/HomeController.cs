@@ -45,12 +45,26 @@ namespace XK.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection f)
         {
-            string usr = f["studyid"];
+            string uid = f["studyid"];
             string psw = f["password"];
-            Session["username"] = usr;
-            var user = from u in udb.xk_Users
-                       where u.u_name == usr && u.u_password == psw
-                       select u;
+			string utype = f["u_type"];
+			switch (utype)
+			{
+				
+				case "student":
+					var user = udb.xk_Stus.FirstOrDefault(s => s.stu_id == uid && udb.xk_Users.FirstOrDefault(u=>u.u_name==s.stu_name).u_password == psw);break;
+				case "teacher":
+					user = udb.xk_Stus.FirstOrDefault(s => s.stu_id == uid); break;
+				case "admin":
+					user = udb.xk_Stus.FirstOrDefault(s => s.stu_id == uid); break;
+				case "user":
+					user = udb.xk_Stus.FirstOrDefault(s => s.stu_id == uid); break;
+			default:
+					TempData["info"] = "发生未知错误";
+					return View("Index");
+
+					Session["username"] = usr;
+           
             if (user.Count<User>() == 0)
             {
                 TempData["info"] = "登录失败,用户名或者密码错误";
@@ -59,19 +73,10 @@ namespace XK.Controllers
             else
             {
                 userEntity = user.First<User>();
-                TempData["value"] = userEntity.u_name;
-                switch( userEntity.u_level){
-                    case 0:
-                        return View("usrLogin",userEntity);
-                    case 1:
-                        return View("stuLogin",userEntity);
-                    case 2:
-                        return View("tecLogin",userEntity);
-                    case 3:
-                        return View("adminLogin",userEntity);
-                    default:
-                        TempData["info"] = "发生未知错误";
-                        return View("Index");
+				//将用户信息写入session
+				System.Web.HttpContext.Current.Session.Add("uid", userEntity.u_id);
+				TempData["value"] = userEntity.u_name;
+                
                 }
             }                
         }  

@@ -26,10 +26,28 @@ namespace XK.Controllers
         /// 选课
         /// </summary>
         /// <returns></returns>
-        public ActionResult SelectCourse()
-        {
-            ViewBag.Term = Tools.ToolKit.CurrentTerm();
-            return View();
+        public ActionResult SelectCourse(string c_id)
+		{
+			string currentTerm = Tools.ToolKit.CurrentTerm();
+
+			ViewBag.Term = currentTerm;
+			/*选课逻辑:
+			1. 必须是当前学期的课程
+			2. 选过的课不能再选
+			3. 有时间冲突的课不能再选
+			4. 达到人数上限的课不能再选
+			*/
+
+			var course = mdb.xk_Courses.FirstOrDefault(m => m.cor_id == c_id);
+			//学期, 人数
+			if (!course.cor_trem.Equals(currentTerm) || course.cor_currentnum>course.cor_maxnum)
+			{
+				ViewBag.result = "false";
+				return PartialView();
+			}
+			int uid = int.Parse(System.Web.HttpContext.Current.Session["uid"].ToString());
+#warning 先放一放, 重新去处理登录逻辑
+			return View();
         }
 		public ActionResult SelectItem()
 		{
@@ -47,7 +65,7 @@ namespace XK.Controllers
 						where res.cori_name == curname || res.cori_id == curname
 						select new Models.SelectCourseItem()
 						{
-							cid = ress.cor_cid,
+							cid = ress.cor_id,
 							cname = res.cori_name,
 							caddr = ress.cor_iddr,
 							ctec = ress.cor_tec_id,

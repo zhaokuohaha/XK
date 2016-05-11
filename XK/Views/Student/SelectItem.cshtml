@@ -23,7 +23,13 @@
 					<td>@item.ctec</td>
 					<td>@item.ctime</td>
 					<td>@item.caddr</td>
-					<td>@Ajax.ActionLink("选课", "SelectCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</td>
+					<td>
+						@using (Ajax.BeginForm("SelectCourse", "Student", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+						{
+							@Html.HiddenFor(s => item.cid)
+							<input type="submit" class="btn btn-warning" value="选课" />
+						}
+				</td>
 				</tr>
 			}
 		</tbody>
