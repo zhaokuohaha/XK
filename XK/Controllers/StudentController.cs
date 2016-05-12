@@ -37,7 +37,6 @@ namespace XK.Controllers
 		public ActionResult doSelectCourse(string c_id)
 		{
 			string currentTerm = Tools.ToolKit.CurrentTerm();
-
 			ViewBag.Term = currentTerm;
 			/*选课逻辑:
 			1. 必须是当前学期的课程
@@ -52,13 +51,14 @@ namespace XK.Controllers
 			//用户id---存在session中(角色id)
 			string uid = System.Web.HttpContext.Current.Session["uid"].ToString();
 			//是否已经选过并且没有挂科
-			var validCourse = mdb.xk_Scores.FirstOrDefault(m => m.sco_stu_id == uid && m.sco_cor_id == course.cor_id && m.sco_value >= 60);
+			var validCourse = from sc in mdb.xk_Scores where (sc.sco_stu_id == uid && sc.sco_cor_id == course.cor_cid && sc.sco_value >= 60.0) select sc;
+				//mdb.xk_Scores.FirstOrDefault(m => m.sco_stu_id == uid && m.sco_cor_id == course.cor_id && m.sco_value >= 60.0);
 			var courseTimes = from co in mdb.xk_Courses where new {co.cor_id , co.cor_tec_id}.Equals(
 							  (from s in mdb.xk_Scores where s.sco_stu_id == uid select new { s.sco_cor_id,s.sco_tea_id}))
 							  select co.cor_time;
 			//是否是有效的选课时间
 			bool validSelectTime = true;
-			foreach (string time in courseTimes)
+			foreach (var time in courseTimes)
 			{
 				if (Tools.ToolKit.timeClash(time, course.cor_time))
 				{
@@ -66,6 +66,7 @@ namespace XK.Controllers
 					break;
 				}
 			}
+			#region 不允许选课的情况
 			if (!course.cor_trem.Equals(currentTerm)            //不是本学期
 				|| course.cor_currentnum > course.cor_maxnum    //选课人数已满
 				|| canSelect != "true"                          //没有开放选课
@@ -95,7 +96,18 @@ namespace XK.Controllers
 				ViewBag.result = "false";
 				return PartialView();
 			}
+			#endregion
 			//写到数据库
+			mdb.xk_Scores.Add(new xk_Score
+			{
+				sco_stu_id = c_id,
+				sco_cor_id = course.cor_cid,
+				sco_cor_term = currentTerm,
+				sco_tea_id = course.cor_tec_id,
+			});
+			mdb.SaveChanges();
+			ViewBag.resultInfo = "选课成功";
+			ViewBag.result = "true";
 			return PartialView();
         }
 		public ActionResult SelectItem()
