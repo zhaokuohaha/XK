@@ -1,3 +1,43 @@
-﻿@model IEnumerable<XK.Models.xk_Score>
+﻿@model IEnumerable<XK.Models.SelectCourseItem>
 
-<div class="transparent-panel">
+<div class="transparent-panel" id="deleteShow">
+	<table class="table table-border">
+		<thead>
+			<tr>
+				<th>课号</th>
+				<th>课名</th>
+				<th>任课教师号</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.cid </td>
+					<td>@item.cname </td>
+					<td>@item.ctec </td>
+					<td>
+						@using (Ajax.BeginForm("doDeleteCourse", "Student", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+						{
+							@Html.HiddenFor(c_id => item.ccid)
+							<input type="submit"  class="submit btn btn-warning" value="退课" />
+						}
+					</td>
+				</tr>
+
+			}
+		</tbody>
+	</table>
+</div>
+
+<div class="showinfo">
+	@TempData["delteinfo"]
+</div>
+<script src="~/Scripts/jquery-2.2.2.min.js"></script>
+<script>
+	function remove() {
+		
+		//$("#deleteShow").remove();
+	}
+</script>

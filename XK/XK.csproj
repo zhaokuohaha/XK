@@ -384,6 +384,7 @@
     <Content Include="Views\Shared\_CurseSummary.cshtml" />
     <Content Include="Views\Student\doSelectCourse.cshtml" />
     <Content Include="Views\Student\DeleteCourse.cshtml" />
+    <Content Include="Views\Student\ShowScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
  }
 @section BigTitle{
-    @Model.u_name hhh
+    @Model.u_name 同学
 }
 @section cssfile{
 	<link rel="stylesheet" href="~/css/student.css" />
@@ -15,8 +15,8 @@
 			<div class="menu">
 				<li>@Ajax.ActionLink("选课", "SelectCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
 				<li>@Ajax.ActionLink("退课", "DeleteCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
-				<li>@Ajax.ActionLink("查看课程", "ShowCourse", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
-				<li>@Ajax.ActionLink("查看课程", "ShowTimetable", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
+				
+				<li>@Ajax.ActionLink("查看课表", "ShowTimetable", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
 				<li>@Ajax.ActionLink("查看成绩", "ShowScore", "Student", new AjaxOptions() { UpdateTargetId = "ajaxshow", HttpMethod = "post" })</li>
 			</div>
 		</div>

@@ -173,18 +173,41 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult DeleteCourse()
         {
-			var res = mdb.xk_Scores.All(m => m.sco_stu_id == uid && m.sco_cor_term == currentTerm);
+			var res = from sc in mdb.xk_Scores
+					  where sc.sco_stu_id == uid && sc.sco_cor_term == currentTerm
+					  join coi in mdb.xk_CourseItems
+					  on sc.sco_cor_id equals coi.cori_id
+					  select new SelectCourseItem()
+					  {
+						  ccid = sc.sco_id,
+						  cid = coi.cori_id,
+						  cname = coi.cori_name,
+						  ctec = sc.sco_tea_id,
+					  };
 			return View(res);
         }
 
-        /// <summary>
-        /// 查看课程
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ShowCourse()
-        {
-            return View();
-        }
+		/// <summary>
+		/// 执行退课
+		/// </summary>
+		/// <param name="fc"></param>
+		/// <returns></returns>
+		public ActionResult doDeleteCourse(FormCollection fc)
+		{
+			try { 
+				string scid = fc["item.ccid"];
+				mdb.xk_Scores.Remove(mdb.xk_Scores.Find(scid));
+				mdb.SaveChanges();
+				ViewBag.resultInfo = "退课成功";
+			}
+			catch(Exception ex)
+			{
+				ViewBag.resultInfo = "退课失败";
+			}
+
+			return View("doSelectCourse");
+		}
+
 
         /// <summary>
         /// 查看课表
@@ -202,10 +225,19 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult ShowScore()
         {
-            var res = from c in mdb.xk_Courses orderby c.cor_id descending select c.cor_trem;
-            ViewBag.term = res.ToList();
-            ViewBag.term.Sort();
-            return View();
-        }
+			var res = from sc in mdb.xk_Scores
+					  where sc.sco_stu_id == uid && sc.sco_cor_term == currentTerm
+					  join coi in mdb.xk_CourseItems
+					  on sc.sco_cor_id equals coi.cori_id
+					  select new SelectCourseItem()
+					  {
+						  ccid = sc.sco_id,
+						  cid = coi.cori_id,
+						  cname = coi.cori_name,
+						  ctec = sc.sco_tea_id,
+						  cscore = sc.sco_value,
+					  };
+			return View(res);
+		}
     }
 }

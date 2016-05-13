@@ -33,5 +33,10 @@ namespace XK.Models
         /// 上课地点
         /// </summary>
         public string caddr { get; set; }
+
+		/// <summary>
+		/// 成绩
+		/// </summary>
+		public double cscore { get; set; }
     }
 }
