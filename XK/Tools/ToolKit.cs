@@ -12,7 +12,7 @@ namespace XK.Tools
 		/// </summary>
 		/// <param name="existsTime">已经选过课的时间</param>
 		/// <param name="applyTime">申请选课的时间</param>
-		/// <returns></returns>
+		/// <returns>true 表示冲突, false 表示不冲突</returns>
 		public static bool timeClash(string existsTime , string applyTime)
 		{
 			//如果不是同一天, 说明不冲突
@@ -45,17 +45,28 @@ namespace XK.Tools
         public static string CurrentTerm()
         {
             string ct="";
-            ct += DateTime.Now.Year;
             switch(DateTime.Now.Month)
             {
-                case 2:
+                case 12:
+				case 1:
+				case 2:
+					ct += (( DateTime.Now.Year - 1) + "-" + DateTime.Now.Year);
                     ct += "春季";break;
-                case 4:
-                    ct += "夏季";break;
+                case 3:
+				case 4:
+				case 5:
+					ct += ((DateTime.Now.Year - 1) + "-" + DateTime.Now.Year);
+					ct += "夏季";break;
                 case 6:
-                    ct += "秋季";break;
-                case 11:
-                    ct += "冬季";break;
+				case 7:
+				case 8:
+					ct += (DateTime.Now.Year+"-"+(DateTime.Now.Year + 1));
+					ct += "秋季";break;
+                case 9:
+				case 10:
+				case 11:
+					ct += (DateTime.Now.Year + "-" + (DateTime.Now.Year + 1));
+					ct += "冬季";break;
                 default:
                     ct += "";break;
             }

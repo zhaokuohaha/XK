@@ -383,6 +383,7 @@
     <Content Include="Views\Shared\_StudentLayout.cshtml" />
     <Content Include="Views\Shared\_CurseSummary.cshtml" />
     <Content Include="Views\Student\doSelectCourse.cshtml" />
+    <Content Include="Views\Student\DeleteCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

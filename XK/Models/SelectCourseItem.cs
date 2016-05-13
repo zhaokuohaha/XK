@@ -9,9 +9,14 @@ namespace XK.Models
     public class SelectCourseItem
     {
         /// <summary>
-        /// 课号
+        /// 课程表id ,  可以唯一确定一条数据
         /// </summary>
-        public string cid { get; set; }
+        public string ccid { get; set; }
+
+		/// <summary>
+		/// 课程号
+		/// </summary>
+		public string cid { get; set; }
         /// <summary>
         /// 课名
         /// </summary>

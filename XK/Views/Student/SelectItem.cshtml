@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<XK.Models.SelectCourseItem>
 @*@model IEnumerable<XK.Models.xk_Course>*@
 <hr />
-<h2>查询结果</h2>
-<div class="jumbotron">
+<div class="transparent-panel">
 	<table class="table table-bordered table-condensed">
 		<thead>
 			<tr>
@@ -26,7 +25,7 @@
 					<td>
 						@using (Ajax.BeginForm("doSelectCourse", "Student", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
 						{
-							@Html.HiddenFor(s => item.cid)
+							@Html.HiddenFor(c_id => item.ccid)
 							<input type="submit" class="btn btn-warning" value="选课" />
 						}
 				</td>
