@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Models\ModelDbContext.cs" />
     <Compile Include="Models\SelectCourseItem.cs" />
+    <Compile Include="Models\StudentInfoModel.cs" />
     <Compile Include="Models\xk_Class.cs" />
     <Compile Include="Models\xk_Course.cs" />
     <Compile Include="Models\xk_CourseItem.cs" />
@@ -391,6 +392,8 @@
     <Content Include="Views\Teacher\ShowTimeTable.cshtml" />
     <Content Include="Views\Teacher\ShowStudentsIndex.cshtml" />
     <Content Include="Views\Teacher\ShowStudents.cshtml" />
+    <Content Include="Views\Teacher\InsertScoreIndex.cshtml" />
+    <Content Include="Views\Teacher\InsertScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

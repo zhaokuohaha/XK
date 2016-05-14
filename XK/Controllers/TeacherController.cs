@@ -71,5 +71,34 @@ namespace XK.Controllers
 					  select stu;
 			return PartialView(res);
 		}
+
+
+		public ActionResult InsertScoreIndex()
+		{
+			return View();
+		}
+		public PartialViewResult InsertScore(xk_Course course)
+		{
+			//课程号
+			string corid = mdb.xk_Courses.Find(course.cor_cid).cor_id;
+			//课程名
+			string corname = mdb.xk_CourseItems.Find(corid).cori_name;
+			ViewBag.corid = corid;
+			ViewBag.corname = corname;
+			var res = from sc in mdb.xk_Scores
+					  where sc.sco_tea_id == teacherid && sc.sco_cor_term == currentTerm && sc.sco_cor_id == corid
+					  join stu in mdb.xk_Stus
+					  on sc.sco_stu_id equals stu.stu_id
+					  select new StudentInfoModel()
+					  {
+						  //cor_id = corid,
+						  //cor_name = corname,
+						  stu_id = stu.stu_id,
+						  stu_name = stu.stu_name,
+						  stu_score = sc.sco_value,
+						  stu_major = stu.stu_major
+					  };
+			return PartialView(res);
+		}
 	}
 }
