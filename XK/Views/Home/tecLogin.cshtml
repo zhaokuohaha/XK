@@ -1,18 +1,38 @@
-﻿@model XK.Models.User
-
-@{    
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
-    ViewBag.Title = "教室首页";
- }
-
-@section BigTitle{
-    @Model.u_name hhh
-}
-
-<h1>学生登录页面</h1>
-<hr />
-<button type="button"  onclick="location.href = '@Url.Action("ShowTimeTable", "Teacher")'">查看课表</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowStudent", "Teacher")'">查看选课学生</button>
-<button type="button" onclick="location.href = '@Url.Action("InsertScore", "Teacher")'">录入成绩</button>
-<button type="button" onclick="location.href = '@Url.Action("UpdateScore", "Teacher")'">修改成绩</button>
-<button type="button" onclick="location.href = '@Url.Action("ShowScore", "Teacher")'">查看成绩</button>
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>/>
+	@RenderSection("HeaderFile", false)
+	<link href="~/Content/bootstrap.css" rel="stylesheet" />
+	<link href="~/css/home.css" rel="stylesheet" />
+	<link href="~/css/login.css" rel="stylesheet" />
+	<link href="~/css/teacher.css" rel="stylesheet" />
+	<script src="~/Scripts/bootstrap.js"></script>
+	<script src="~/Scripts/jquery-2.2.2.js"></script>
+	<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</head>
+<body>
+	<div class="header">
+		<div class="infoheader">版本:1.0</div>
+		<h1>欢迎 @ViewBag.TeacherName 教师登录</h1>
+		<h4> 请选择你需要的功能</h4>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="menu">
+					<li>@Html.ActionLink("查看课表", "ShowTimeTable", "Teacher")</li>
+					<li>@Html.ActionLink("查看选课学生", "ShowTeacher", "Teacher")</li>
+					<li>@Html.ActionLink("录入成绩", "InsertScore", "Teacher")</li>
+					<li>@Html.ActionLink("修改成绩", "UpdateScore", "Teacher")</li>
+					<li>@Html.ActionLink("查看成绩", "ShowScore", "Teacher")</li>
+				</div>
+			</div>
+			<div class="col-md-9">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+</body>
+</html>

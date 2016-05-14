@@ -272,6 +272,7 @@
     <Content Include="css\home.css" />
     <Content Include="css\login.css" />
     <Content Include="css\student.css" />
+    <Content Include="css\teacher.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\contentbg.jpg" />
@@ -386,6 +387,8 @@
     <Content Include="Views\Student\doSelectCourse.cshtml" />
     <Content Include="Views\Student\DeleteCourse.cshtml" />
     <Content Include="Views\Student\ShowScore.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\ShowTimeTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

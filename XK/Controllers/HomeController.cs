@@ -59,7 +59,9 @@ namespace XK.Controllers
             {
 				//将用户信息写入session
 				System.Web.HttpContext.Current.Session["uid"] = uid;
-				TempData["value"] = user.u_name;
+				Session["uid"] = uid;
+				TempData["username"] = user.u_name;
+
 				switch (user.u_level)
 				{
 					case 0:
@@ -67,8 +69,10 @@ namespace XK.Controllers
 					case 1:
 						return View("stuLogin", user);
 					case 2:
-						return View("tecLogin", user);
+						return RedirectToAction("Index", "Teacher", user);
+						//return View("tecLogin", user);
 					case 3:
+						
 						return View("adminLogin", user);
 					default:
 						TempData["info"] = "发生未知错误";
