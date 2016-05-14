@@ -64,19 +64,38 @@ namespace XK.Controllers
 		public PartialViewResult ShowStudents(xk_Course course)
 		{
 			string cor_id = mdb.xk_Courses.Find(course.cor_cid).cor_id;
+			//课程名
+			string corname = mdb.xk_CourseItems.Find(cor_id).cori_name;
+			ViewBag.corid = cor_id;
+			ViewBag.corname = corname;
+
 			var res = from sc in mdb.xk_Scores
 					  where sc.sco_tea_id == teacherid && sc.sco_cor_term == currentTerm && sc.sco_cor_id == cor_id
 					  join stu in mdb.xk_Stus
 					  on sc.sco_stu_id equals stu.stu_id
-					  select stu;
+					  select new StudentInfoModel()
+					  {
+						  stu_id = stu.stu_id,
+						  stu_name = stu.stu_name,
+						  stu_score = sc.sco_value,
+						  stu_major = stu.stu_major,
+					  };
 			return PartialView(res);
 		}
 
-
+		/// <summary>
+		/// 录入成绩首页
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult InsertScoreIndex()
 		{
 			return View();
 		}
+		/// <summary>
+		/// 录入成绩----显示学生名单
+		/// </summary>
+		/// <param name="course"></param>
+		/// <returns></returns>
 		public PartialViewResult InsertScore(xk_Course course)
 		{
 			//课程号
@@ -99,6 +118,24 @@ namespace XK.Controllers
 						  stu_major = stu.stu_major
 					  };
 			return PartialView(res);
+		}
+
+		/// <summary>
+		/// 录入成绩----写入数据库
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult doInsertScore(IEnumerable<StudentInfoModel> stu)
+		{
+			return View(stu);
+		}
+
+		/// <summary>
+		/// 修改成绩首页
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult UpdateScore()
+		{
+			return View();
 		}
 	}
 }

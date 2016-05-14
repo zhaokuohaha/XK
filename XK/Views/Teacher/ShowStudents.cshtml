@@ -1,12 +1,14 @@
-﻿@model IEnumerable<XK.Models.xk_Stu>
+﻿@model IEnumerable<XK.Models.StudentInfoModel>
 
 <div class="transparent-panel">
+	<h4>@ViewBag.corid/@ViewBag.corname</h4>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th>学号</th>
 				<th>姓名</th>
 				<th>专业</th>
+				<th>成绩</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,6 +18,7 @@
 					<td>@item.stu_id</td>
 					<td>@item.stu_name</td>
 					<td>@item.stu_major</td>
+					<td>@item.stu_score</td>
 				</tr>
 			}
 		</tbody>

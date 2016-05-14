@@ -1,0 +1,15 @@
+﻿@model IEnumerable<XK.Models.StudentInfoModel>
+
+@{
+	ViewBag.Title = "doInsertScore";
+	Layout = "~/Views/Home/tecLogin.cshtml";
+}
+
+<div class="transparent-panel">
+	@foreach (var item in Model)
+	{
+		@item.cor_name
+		@item.stu_score
+		<hr />
+	}
+</div>
