@@ -15,7 +15,7 @@
 <body>
 	<div class="header">
 		<div class="infoheader">版本:1.0</div>
-		<h1>欢迎 @ViewBag.TeacherName 教师登录</h1>
+		<h1> @ViewBag.BigTitle </h1>
 		<h4> 请选择你需要的功能</h4>
 	</div>
 	<div class="container">
@@ -23,7 +23,7 @@
 			<div class="col-md-2">
 				<div class="menu">
 					<li>@Html.ActionLink("查看课表", "ShowTimeTable", "Teacher")</li>
-					<li>@Html.ActionLink("查看选课学生", "ShowTeacher", "Teacher")</li>
+					<li>@Html.ActionLink("查看选课学生", "ShowStudentsIndex", "Teacher")</li>
 					<li>@Html.ActionLink("录入成绩", "InsertScore", "Teacher")</li>
 					<li>@Html.ActionLink("修改成绩", "UpdateScore", "Teacher")</li>
 					<li>@Html.ActionLink("查看成绩", "ShowScore", "Teacher")</li>

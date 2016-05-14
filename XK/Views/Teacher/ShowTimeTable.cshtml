@@ -8,6 +8,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
+				<th>开课ID</th>
 				<th>课程号</th>
 				<th>课程名</th>
 				<th>上课地点</th>
@@ -18,6 +19,7 @@
 			@foreach (var time in Model)
 			{
 				<tr>
+					<th>@time.ccid</th>
 					<td>@time.cid</td>
 					<td>@time.cname</td>
 					<td>@time.caddr</td>

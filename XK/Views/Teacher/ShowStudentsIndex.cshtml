@@ -1,0 +1,28 @@
+﻿@model XK.Models.xk_Course
+@{
+	ViewBag.BigTitle = "查看学生首页";
+    ViewBag.Title = "ShowStudentsIndex";
+    Layout = "~/Views/Home/tecLogin.cshtml";
+}
+
+<div class="row">
+	<br />
+	<div class="col-md-6">
+		@using (Ajax.BeginForm("ShowStudents", "Teacher", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+		{
+			<div class="input-group">
+				<div class="input-group-addon">开课ID</div>
+				@Html.TextBoxFor(m => m.cor_cid, new { @class = "form-control" })
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">确定</button>
+				</span>
+			</div>
+		}
+	</div>
+</div>
+<div class="row">
+	<div id="Ajaxshow">
+
+	</div>
+</div>
+

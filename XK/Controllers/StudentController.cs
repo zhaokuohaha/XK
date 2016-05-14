@@ -215,7 +215,7 @@ namespace XK.Controllers
         /// 查看课表
         /// </summary>
         /// <returns></returns>
-        public JsonResult ShowTimetable()
+        public string ShowTimetable()
         {
 			var times = from sc in mdb.xk_Scores
 						where sc.sco_stu_id == uid && sc.sco_cor_term == currentTerm
@@ -235,7 +235,8 @@ namespace XK.Controllers
 			}
 			result.Remove(result.Length-1,1);
 			result.Append("]");
-			return Json(result);
+			return result.ToString();
+			//return Json(result);
         }
 
 

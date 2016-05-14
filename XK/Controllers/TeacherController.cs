@@ -22,7 +22,7 @@ namespace XK.Controllers
 				//teacherid = Session["uid"] as string;
 			if (currentTerm == null)
 				currentTerm = ToolKit.CurrentTerm();
-			currentTerm = "2012-2013冬季";
+			currentTerm = "2013-2014秋季";
 		}
         //
         // GET: /Teacher/
@@ -38,15 +38,11 @@ namespace XK.Controllers
 		/// <returns></returns>
 		public ActionResult ShowTimeTable()
 		{
-			/*思路:
-			1. 按照教师号,学期分组,
-			2. 按上课时间分组
-			*/
-
 			var times = from co in mdb.xk_Courses
 						where co.cor_tec_id == teacherid && co.cor_trem == currentTerm
 						select new SelectCourseItem()
 						{
+							ccid = co.cor_cid,
 							cid = co.cor_id,
 							cname = mdb.xk_CourseItems.FirstOrDefault(cori => cori.cori_id == co.cor_id).cori_name,
 							caddr = co.cor_iddr,
@@ -56,6 +52,24 @@ namespace XK.Controllers
 			return View(times);
 		}
 
+		/// <summary>
+		/// 查看选课学生母版页---选择课程
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult ShowStudentsIndex()
+		{
+			return View();
+		}
 
+		public PartialViewResult ShowStudents(xk_Course course)
+		{
+			string cor_id = mdb.xk_Courses.Find(course.cor_cid).cor_id;
+			var res = from sc in mdb.xk_Scores
+					  where sc.sco_tea_id == teacherid && sc.sco_cor_term == currentTerm && sc.sco_cor_id == cor_id
+					  join stu in mdb.xk_Stus
+					  on sc.sco_stu_id equals stu.stu_id
+					  select stu;
+			return PartialView(res);
+		}
 	}
 }

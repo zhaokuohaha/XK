@@ -1,0 +1,23 @@
+﻿@model IEnumerable<XK.Models.xk_Stu>
+
+<div class="transparent-panel">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>学号</th>
+				<th>姓名</th>
+				<th>专业</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.stu_id</td>
+					<td>@item.stu_name</td>
+					<td>@item.stu_major</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
