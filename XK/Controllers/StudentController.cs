@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using XK.Models;
 
@@ -213,9 +215,27 @@ namespace XK.Controllers
         /// 查看课表
         /// </summary>
         /// <returns></returns>
-        public ActionResult ShowTimetable()
+        public JsonResult ShowTimetable()
         {
-            return View();
+			var times = from sc in mdb.xk_Scores
+						where sc.sco_stu_id == uid && sc.sco_cor_term == currentTerm
+						join co in mdb.xk_Courses
+						on new { teacher = sc.sco_tea_id, term = sc.sco_cor_term, course = sc.sco_cor_id }
+						equals new { teacher = co.cor_tec_id, term = co.cor_trem, course = co.cor_id }
+						select new
+						{
+							cor = mdb.xk_CourseItems.FirstOrDefault(f => f.cori_id == sc.sco_cor_id).cori_name,
+							tea = mdb.xk_Teachers.FirstOrDefault(f => f.tch_id == sc.sco_tea_id).tch_name,
+							time = co.cor_time,
+						};
+			StringBuilder result = new StringBuilder("[");
+			foreach(var time in times)
+			{
+				result.Append("{courseInfo : ['" + time.cor + "','" + time.tea + "'],sksj : '" + time.time + "'},");
+			}
+			result.Remove(result.Length-1,1);
+			result.Append("]");
+			return Json(result);
         }
 
 
