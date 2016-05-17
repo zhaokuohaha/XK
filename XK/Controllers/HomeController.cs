@@ -60,6 +60,7 @@ namespace XK.Controllers
 				//将用户信息写入session
 				System.Web.HttpContext.Current.Session["uid"] = uid;
 				Session["uid"] = uid;
+				System.Web.HttpContext.Current.Session["uname"] = user.u_name;
 				TempData["username"] = user.u_name;
 
 				switch (user.u_level)

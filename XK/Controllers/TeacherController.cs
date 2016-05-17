@@ -22,7 +22,7 @@ namespace XK.Controllers
 				//teacherid = Session["uid"] as string;
 			if (currentTerm == null)
 				currentTerm = ToolKit.CurrentTerm();
-			currentTerm = "2013-2014秋季";
+			//currentTerm = "2013-2014秋季";
 		}
         //
         // GET: /Teacher/
