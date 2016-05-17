@@ -1,15 +1,33 @@
-﻿@model IEnumerable<XK.Models.StudentInfoModel>
-
+﻿@model  List<XK.Models.StudentInfoModel>
 @{
 	ViewBag.Title = "doInsertScore";
 	Layout = "~/Views/Home/tecLogin.cshtml";
 }
-
 <div class="transparent-panel">
-	@foreach (var item in Model)
-	{
-		@item.cor_name
-		@item.stu_score
-		<hr />
-	}
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>学号</th>
+				<th>姓名</th>
+				<th>分数</th>
+				<th>专业</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (int i = 0; i < Model.Count; i++)
+			{
+				
+				<tr>
+					<td>@Html.DisplayTextFor(m => Model[i].sco_id)</td>
+					<td>@Html.DisplayTextFor(m => Model[i].stu_id)</td>
+					<td>@Html.DisplayTextFor(m => Model[i].stu_name)</td>
+					<td>
+						@Html.DisplayTextFor(m => Model[i].stu_score)
+					</td>
+					<td>@Html.DisplayTextFor(m => Model[i].stu_major)</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 </div>

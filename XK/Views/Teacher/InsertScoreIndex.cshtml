@@ -10,7 +10,7 @@
 <div class="row">
 	<br />
 	<div class="col-md-6">
-		@using (Ajax.BeginForm("InsertScore", "Teacher", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+		@using (Ajax.BeginForm("InsertScore", "Teacher", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Ajaxshow", InsertionMode = InsertionMode.Replace }))
 		{
 			<div class="input-group">
 				<div class="input-group-addon">开课ID</div>

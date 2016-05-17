@@ -74,12 +74,7 @@ namespace XK.Controllers
 			//给你学生的学号, 怎么找出这个学生本学期上的课程
 			//1. 找出该学生选修过的课程的 [课程号,教师号] 
 			//2. 遍历课程号, 找出学期为本学期的课程
-			//var selectedCourse = from sc in mdb.xk_Scores
-			//					 where sc.sco_cor_term == currentTerm && sc.sco_stu_id == uid
-			//					 select new { sc.sco_cor_id, sc.sco_tea_id };
-			//然后不知道怎么遍历了Orz.....
-			//var courseItems = from co in mdb.xk_Courses where co.cor_id
-
+			//-->实现: Linq多表联接
 			var courseTimes = from sc in mdb.xk_Scores
 							  join co in mdb.xk_Courses
 							  on new { cor_id = sc.sco_cor_id, cor_tec = sc.sco_tea_id } equals new { cor_id = co.cor_id, cor_tec = co.cor_tec_id }

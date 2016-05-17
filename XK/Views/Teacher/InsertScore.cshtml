@@ -1,4 +1,4 @@
-﻿@model IEnumerable<XK.Models.StudentInfoModel>
+﻿@model List<XK.Models.StudentInfoModel>
 
 <div class="transparent-panel">
 	<h5>@ViewBag.corid/@ViewBag.corname</h5>
@@ -14,15 +14,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var item in Model)
+				@for(int i = 0;  i<Model.Count; i++)
 				{
+					@Html.HiddenFor(m=>Model[i].cor_id)
+					@Html.HiddenFor(m => Model[i].stu_id)
+					@Html.HiddenFor(m => Model[i].stu_name)
+					@Html.HiddenFor(m => Model[i].stu_major)
+					@Html.HiddenFor(m => Model[i].sco_id)
 					<tr>
-						<td>@item.stu_id</td>
-						<td>@item.stu_name</td>
+						<td>@Html.DisplayTextFor(m => Model[i].stu_id)</td>
+						<td>@Html.DisplayTextFor(m => Model[i].stu_name)</td>
 						<td>
-							@Html.TextBoxFor(score => item.stu_score, new { @value = ""})
+							@Html.EditorFor(m => Model[i].stu_score)
 						</td>
-						<td>@item.stu_major</td>
+						<td>@Html.DisplayTextFor(m => Model[i].stu_major)</td>
 					</tr>
 				}
 			</tbody>

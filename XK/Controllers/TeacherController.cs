@@ -110,25 +110,37 @@ namespace XK.Controllers
 					  on sc.sco_stu_id equals stu.stu_id
 					  select new StudentInfoModel()
 					  {
-						  //cor_id = corid,
-						  //cor_name = corname,
+						  sco_id = sc.sco_id,
+						  cor_id = corid,
+						  cor_name = corname,
 						  stu_id = stu.stu_id,
 						  stu_name = stu.stu_name,
 						  stu_score = sc.sco_value,
 						  stu_major = stu.stu_major
 					  };
-			return PartialView(res);
+			List < StudentInfoModel > list = res.ToList();
+			return PartialView(list);
 		}
 
 		/// <summary>
 		/// 录入成绩----写入数据库
 		/// </summary>
 		/// <returns></returns>
-		public ActionResult doInsertScore(IEnumerable<StudentInfoModel> stu)
+		public ActionResult doInsertScore(List<StudentInfoModel> stu)
 		{
+			//调试发现  执行到这一步的时候stu的值是null
+			//怎样绑定数据????
+			//用list: 将IEnumable转为List --> View层用for 循环 -->  do方法用List接收表单
+			//虽然 我觉得这并不是正规套路的方法  --->  可是, 它成功了!!!!!
+
+			foreach(var item in stu)
+			{
+				mdb.xk_Scores.Find(item.sco_id).sco_value = item.stu_score;
+			}
+			mdb.SaveChanges();
 			return View(stu);
 		}
-
+		
 		/// <summary>
 		/// 修改成绩首页
 		/// </summary>

@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Runtime.Serialization;
 
 namespace XK.Models
 {
 	public class StudentInfoModel
 	{
+		/// <summary>
+		/// 成绩表id
+		/// </summary>
+		public string sco_id { get; set; }
 		/// <summary>
 		/// 课程号
 		/// </summary>
@@ -35,7 +40,5 @@ namespace XK.Models
 		/// 学生成绩
 		/// </summary>
 		public double stu_score { get; set; }
-		
-
 	}
 }
