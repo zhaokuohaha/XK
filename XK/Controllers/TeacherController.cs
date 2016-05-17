@@ -140,7 +140,45 @@ namespace XK.Controllers
 			mdb.SaveChanges();
 			return View(stu);
 		}
-		
+		/// <summary>
+		/// 显示成绩首页
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult ShowScore()
+		{
+			return View();
+		}
+		/// <summary>
+		/// 执行显示成绩动作方法
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult doShowScore(xk_Course course)
+		{
+			//课程号
+			string corid = mdb.xk_Courses.Find(course.cor_cid).cor_id;
+			//课程名
+			string corname = mdb.xk_CourseItems.Find(corid).cori_name;
+			ViewBag.corid = corid;
+			ViewBag.corname = corname;
+			var res = from sc in mdb.xk_Scores
+					  where sc.sco_tea_id == teacherid && sc.sco_cor_term == currentTerm && sc.sco_cor_id == corid
+					  join stu in mdb.xk_Stus
+					  on sc.sco_stu_id equals stu.stu_id
+					  select new StudentInfoModel()
+					  {
+						  sco_id = sc.sco_id,
+						  cor_id = corid,
+						  cor_name = corname,
+						  stu_id = stu.stu_id,
+						  stu_name = stu.stu_name,
+						  stu_score = sc.sco_value,
+						  stu_major = stu.stu_major
+					  };
+			return PartialView(res);
+#warning 需求, 要一种图表显示实现
+
+			return View();
+		}
 		/// <summary>
 		/// 修改成绩首页
 		/// </summary>

@@ -396,6 +396,8 @@
     <Content Include="Views\Teacher\InsertScore.cshtml" />
     <Content Include="Views\Teacher\doInsertScore.cshtml" />
     <Content Include="Views\Teacher\UpdateScore.cshtml" />
+    <Content Include="Views\Teacher\ShowScore.cshtml" />
+    <Content Include="Views\Teacher\doShowScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
