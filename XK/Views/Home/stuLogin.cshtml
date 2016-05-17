@@ -31,13 +31,15 @@
 <script src="~/Scripts/jquery-schedule.js"></script>
 <script>
 	function showTimetable() {
-		var timetable = $("<table id=schdeule class=table table-bordered></table>");
+		var timetable = $('<table id=schdeule class="table table-bordered"></table>');
 		$("#ajaxshow").append(timetable);
 		$.ajax({
 			url: "/Student/ShowTimetable",
-			method:"post",
-			success: function (result) {
-				var data = JSON.parse(result.responseText);
+			method: "post",
+			dataType:"json",
+			success: function (data) {
+				console.dir(data.result);
+				//var data = JSON.parse(result.responseText);
 				console.log(data);
 				$('#schdeule').createSchedule(data, { classNum: 10, th: ['时间', '星期一', '星期二', '星期三', '星期四', '星期五'], });
 			},
