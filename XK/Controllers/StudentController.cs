@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -132,7 +133,7 @@ namespace XK.Controllers
 				sco_cor_term = currentTerm,
 				sco_tea_id = course.cor_tec_id,
 			});
-			mdb.SaveChanges();
+			mdb.SaveChanges(); 
 			ViewBag.resultInfo = "选课成功";
 			ViewBag.result = "true";
 			return PartialView();
@@ -210,7 +211,7 @@ namespace XK.Controllers
         /// 查看课表
         /// </summary>
         /// <returns></returns>
-        public JsonResult ShowTimetable()
+        public string ShowTimetable()
         {
 			var times = from sc in mdb.xk_Scores
 						where sc.sco_stu_id == uid && sc.sco_cor_term == currentTerm
@@ -223,21 +224,21 @@ namespace XK.Controllers
 							tea = mdb.xk_Teachers.FirstOrDefault(f => f.tch_id == sc.sco_tea_id).tch_name,
 							time = co.cor_time,
 						};
-			var res = new JsonResult();
-			res.Data = times;
-			res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;//允许使用GET方式获取，否则用GET获取是会报错。
-			return res;
+			//var res = new JsonResult();
+			//res.Data = times;
+			//res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;//允许使用GET方式获取，否则用GET获取是会报错。
+			//return res;
 			//--------------以下是返回字符串的情况
-			//StringBuilder result = new StringBuilder("[");
-			//foreach(var time in times)
-			//{
-			//	result.Append("{courseInfo : ['" + time.cor + "','" + time.tea + "'],sksj : '" + time.time + "'},");
-			//}
-			//result.Remove(result.Length-1,1);
-			//result.Append("]");
-			//return result.ToString();
+			StringBuilder result = new StringBuilder("{\"course\":[");
+			foreach (var time in times)
+			{
+				result.Append("{\"courseInfo\" : [\"" + time.cor + "\",\"" + time.tea + "\"],\"sksj\" : \"" + time.time + "\"},");
+			}
+			result.Remove(result.Length - 1, 1);
+			result.Append("]}");
+			return result.ToString();
 			//return Json(result);
-        }
+		}
 
 
         /// <summary>
