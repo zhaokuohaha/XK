@@ -39,17 +39,11 @@
 			method: "post",
 			dataType:"json",
 			success: function (result) {
-				//console.dir(data.result);
-				console.log(result);
-				//var data = JSON.parse(result);
-				//console.log(data);
+				console.dir(result);
 				$('#schdeule').createSchedule(result.course, { classNum: 10, th: ['时间', '星期一', '星期二', '星期三', '星期四', '星期五'], });
 			},
 			error: function (msg) {
-				console.log(msg.responseText);
-				var data = JSON.parse(msg.responseText);
-				console.log(data);
-				$('#schdeule').createSchedule(data, { classNum: 10, th: ['时间', '星期一', '星期二', '星期三', '星期四', '星期五'], });
+				console.error(msg);
 			}
 		});
 	}

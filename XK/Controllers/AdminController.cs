@@ -136,8 +136,11 @@ namespace XK.Controllers
         /// <returns></returns>
         public ActionResult SelectDeleteCourse(FormCollection fc)
         {
-            IQueryable<xk_Course> teaList = mdb.xk_Courses.Where(m => m.cor_tec_id.Equals(fc["tid"]));
-            ViewBag.tname = mdb.xk_Teachers.FirstOrDefault(m => m.tch_id.Equals(fc["tid"])).tch_name;
+			string teaid = fc["tid"];
+			var teaList = from res in mdb.xk_Courses
+						  where res.cor_tec_id == teaid
+						  select res;
+            //ViewBag.tname = mdb.xk_Teachers.FirstOrDefault(m => m.tch_id.Equals(fc["tid"])).tch_name;
             return PartialView(teaList);
         }
 
@@ -146,9 +149,20 @@ namespace XK.Controllers
         /// </summary>
         /// <param name="fc"></param>
         /// <returns></returns>
-        public string DoDeleteCourse(FormCollection fc)
+        public string doDeleteCourse(FormCollection fc)
         {
-            return "删除成功";
+			int ccid = Convert.ToInt32(fc["item.cor_cid"]);
+			try
+			{ 
+				mdb.xk_Courses.Remove(mdb.xk_Courses.Find(ccid));
+				mdb.SaveChanges();
+				return "删除成功";
+			}
+			catch(Exception ex)
+			{
+				return "删除失败, 服务器异常: "+ex.Message;
+			}
+			
         }
 
         /// <summary>

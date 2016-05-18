@@ -1,7 +1,7 @@
-﻿@using (Ajax.BeginForm("SelectDeleteCourse", "Admin", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.InsertAfter }))
+﻿@using (Ajax.BeginForm("SelectDeleteCourse", "Admin", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ajaxshow", InsertionMode = InsertionMode.Replace }))
 {
     <div class="form-signin">
         <input type="text" name="tid" value="" class="form-control" placeholder="输入教师号" /><p></p>
-        <input type="submit" name="submit" class="btn btn-primary" value="确定" />
+        <input type="submit" name="submit" class="btn btn-block btn-primary" value="确定" />
     </div>
 }

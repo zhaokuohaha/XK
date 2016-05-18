@@ -193,7 +193,7 @@ namespace XK.Controllers
 		public ActionResult doDeleteCourse(FormCollection fc)
 		{
 			try { 
-				string scid = fc["item.ccid"];
+				int scid = Convert.ToInt32(fc["item.ccid"]);
 				mdb.xk_Scores.Remove(mdb.xk_Scores.Find(scid));
 				mdb.SaveChanges();
 				ViewBag.resultInfo = "退课成功";
