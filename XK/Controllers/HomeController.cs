@@ -44,6 +44,7 @@ namespace XK.Controllers
 				TempData["info"] = "注册失败, 用户已存在";
 				return Redirect("Register");
 			}
+
 			udb.xk_Users.Add(new Models.User()
 			{
 				u_level = 0,
