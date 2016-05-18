@@ -29,19 +29,39 @@ namespace XK.Controllers
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        [HttpPost]
-        public ActionResult Register(FormCollection f)
+        public ActionResult Register()
         {
-            TempData["info"] = "注册失败,用户已存在";
-            return RedirectToAction("Index");
+			return View();
         }
 
-        /// <summary>
-        /// 处理用户登录, 根据不同的用户类型返回不同的页面视图
-        /// </summary>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        [HttpPost]
+		public ActionResult doRegister(FormCollection fc)
+		{
+			string uid = fc["studyid"];
+			string psw = fc["password"];
+			var user = udb.xk_Users.FirstOrDefault(m => m.u_rid == uid);
+			if(user != null)
+			{
+				TempData["info"] = "注册失败, 用户已存在";
+				return Redirect("Register");
+			}
+			udb.xk_Users.Add(new Models.User()
+			{
+				u_level = 0,
+				u_rid = uid,
+				u_password = psw,
+				u_name = uid,
+			});
+			udb.SaveChanges();
+			TempData["info"] = "注册成功";
+			return Redirect("Index");
+		}
+
+		/// <summary>
+		/// 处理用户登录, 根据不同的用户类型返回不同的页面视图
+		/// </summary>
+		/// <param name="f"></param>
+		/// <returns></returns>
+		[HttpPost]
         public ActionResult Login(FormCollection f)
         {
             string uid = f["studyid"];

@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="infoheader">版本:1.0</div>
-        <h1>欢迎访问学生信息管理系统</h1>
-    </div> 
-    <div class="container">        
-        <div class="content">
-            <div class="form-signin">
+	<div class="header">
+		<div class="infoheader">版本:1.0</div>
+		<h1>欢迎访问学生信息管理系统</h1>
+	</div>
+	<div class="container">
+		<div class="content">
+			<div class="form-signin">
 				<form action="/Home/Login" method="post" class="loginform">
 					<h2 class="form-signin-heading">用户登录</h2>
 					<input value="u" type="text" class="input-block-level" name="studyid" placeholder="学号/工号/用户序号" /><p></p>
@@ -29,60 +29,61 @@
 					<input id="rmbme" checked="checked" type="checkbox" name="rememberme" value="remember-me" />记住用户 <p></p>
 					<input type="submit" onclick="javascript: setCookies();" class="btn btn-large btn-primary btn-login" name="name" value="登录" />
 				</form>
-                <form action="Home/Register" method="post">
-                    <input type="submit" class="btn btn-large" value="注册">
-                </form>
-                <div class="info">@TempData["info"]</div>
-            </div>   
-        </div>
-        <div class="fooder">
+				<a href="Home/Register">
+					<button class="btn btn-default">注册</button>
+				</a>
+				<div class="info">@TempData["info"]</div>
+			</div>
+		</div>
+		<div class="fooder">
 
-        </div>
-    </div>
+		</div>
+	</div>
 
 
-    <script>
+	<script>
 
-        function setCookies() {
-            if ($("#rmbme").is(":checked")) {
-                setCookie("xk_username", $("input[name=studyid]").val());
-                setCookie("xk_password", $("input[name=password]").val());
-                //document.cookie = "xk_username=" + $("input[name=studyid]").val();
-                //document.cookie = "xk_password=" + $("input[name=password]").val();
-                //$.cookie('xk_username', $("input[name=studyid]").val(), { expires: 7, path: "/" });
-                //$.cookie('xk_password', $("input[name=password]").val(), { expires: 7, path: "/" });
-            }
-            else {
-                setCookie("xk_username", null);
-                setCookie("xk_username", null);
-                //document.cookie = "xk_username=null";
-                //document.cookie = "xk_password=null";
-            }
-        }
+		function setCookies() {
+			if ($("#rmbme").is(":checked")) {
+				setCookie("xk_username", $("input[name=studyid]").val());
+				setCookie("xk_password", $("input[name=password]").val());
+				//document.cookie = "xk_username=" + $("input[name=studyid]").val();
+				//document.cookie = "xk_password=" + $("input[name=password]").val();
+				//$.cookie('xk_username', $("input[name=studyid]").val(), { expires: 7, path: "/" });
+				//$.cookie('xk_password', $("input[name=password]").val(), { expires: 7, path: "/" });
+			}
+			else {
+				setCookie("xk_username", null);
+				setCookie("xk_username", null);
+				//document.cookie = "xk_username=null";
+				//document.cookie = "xk_password=null";
+			}
+		}
 
-        function getCookie(name) {
-            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+		function getCookie(name) {
+			var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
-            if (arr = document.cookie.match(reg))
+			if (arr = document.cookie.match(reg))
 
-                return unescape(arr[2]);
-            else
-                return null;
-        }
-        function setCookie(name, value) {
-            var Days = 30;
-            var exp = new Date();
-            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-        }
+				return unescape(arr[2]);
+			else
+				return null;
+		}
+		function setCookie(name, value) {
+			var Days = 30;
+			var exp = new Date();
+			exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+			document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+		}
 
-        function getCookies() {
-            $("input[name=studyid]").val(getCookie('xk_username'));
-            $("input[name=password]").val(getCookie('xk_password'));
-        }
+		function getCookies() {
+			$("input[name=studyid]").val(getCookie('xk_username'));
+			$("input[name=password]").val(getCookie('xk_password'));
+		}
 
-        getCookies();
-    </script>
+		getCookies();
+	</script>
 
 </body>
+
 </html>
