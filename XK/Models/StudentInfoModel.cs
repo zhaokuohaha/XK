@@ -11,7 +11,7 @@ namespace XK.Models
 		/// <summary>
 		/// 成绩表id
 		/// </summary>
-		public string sco_id { get; set; }
+		public int sco_id { get; set; }
 		/// <summary>
 		/// 课程号
 		/// </summary>

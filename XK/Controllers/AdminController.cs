@@ -30,7 +30,7 @@ namespace XK.Controllers
         //[HttpPost]
         public ActionResult ShowStudent()
         {
-            var res = from s in mdb.xk_Stus select s ;
+            var res = from s in mdb.xk_Stus select s;
             return PartialView(res);
         }
         #endregion
@@ -105,15 +105,15 @@ namespace XK.Controllers
             {
                 return "课程不存在, 请开通课程";
             }
-            xk_Course xc = new xk_Course
+            xk_Course xc = new xk_Course()
             {
                 cor_id = fc["cid"],
-                cor_iddr = fc["ciddr"],
+                cor_iddr = fc["caddr"],
                 cor_tec_id = fc["ctch"],
                 cor_type = fc["ctype"],
                 cor_time = fc["ctime"],
                 cor_trem = fc["cterm"]
-            };
+			};
             mdb.xk_Courses.Add(xc);
             mdb.SaveChanges();
             return "添加成功";
@@ -199,7 +199,7 @@ namespace XK.Controllers
             //录入成绩
             string CanUpdateScore = fc["CanUpdateScore"];
 
-            xk_Setting xs = mdb.xk_Settings.FirstOrDefault(m => m.st_name == CanSelectCourse);
+            xk_Setting xs = mdb.xk_Settings.FirstOrDefault(m => m.st_name == "CanSelectCourse");
             //数据库中是否存在记录
             if (xs==null)
             {
@@ -211,7 +211,7 @@ namespace XK.Controllers
                 xs.st_value = CanSelectCourse;
                 mdb.SaveChanges();
             }
-            xs = mdb.xk_Settings.FirstOrDefault(m => m.st_name.Equals(CanUpdateScore));
+            xs = mdb.xk_Settings.FirstOrDefault(m => m.st_name.Equals("CanUpdateScore"));
             if (xs == null)
             {
                 mdb.xk_Settings.Add(new xk_Setting { st_name = "CanUpdateScore", st_value = CanUpdateScore });

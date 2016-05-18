@@ -11,7 +11,7 @@ namespace XK.Models
         /// <summary>
         /// 课程表id ,  可以唯一确定一条数据
         /// </summary>
-        public string ccid { get; set; }
+        public int ccid { get; set; }
 
 		/// <summary>
 		/// 课程号

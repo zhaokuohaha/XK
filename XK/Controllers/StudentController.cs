@@ -50,7 +50,7 @@ namespace XK.Controllers
 		public ActionResult doSelectCourse(FormCollection fc)
 		{
 			//课表主键
-			string c_cid = fc["item.ccid"];
+			int c_cid = Convert.ToInt32(fc["item.ccid"]);
 			ViewBag.Term = currentTerm;
 			/*选课逻辑:
 			1. 必须是当前学期的课程

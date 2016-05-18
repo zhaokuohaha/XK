@@ -16,7 +16,7 @@ namespace XK.Models
         /// 主键id
         /// </summary>
         [Key]
-        public string sco_id { get; set; }
+        public int sco_id { get; set; }
         /// <summary>
         /// 学号
         /// </summary>
